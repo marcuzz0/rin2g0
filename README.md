@@ -25,6 +25,7 @@ Di seguito vengono riportati i passaggi per l'installazione delle dipendenze nec
 ```
 $ sudo apt-get update && sudo apt-get upgrade
 $ sudo apt-get install proj-bin
+$ sudo apt-get install tcsh
 $ mkdir bin
 $ cd $HOME/bin
 $ git clone https://github.com/marcuzz0/rin2go.git
@@ -36,6 +37,7 @@ $ echo "export PATH="$PATH:$HOME/bin/rin2go"" >> .bashrc
 $ brew install proj
 $ brew install coreutils
 $ brew install findutils
+$ brew install tcsh
 $ mkdir bin
 $ cd $HOME/bin
 $ git clone https://github.com/marcuzz0/rin2go.git
