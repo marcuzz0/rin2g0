@@ -27,6 +27,7 @@ $ sudo apt-get update && sudo apt-get upgrade
 $ sudo apt-get install proj-bin
 $ sudo apt-get install gdal-bin
 $ sudo apt-get install tcsh
+$ sudo apt install npm
 $ mkdir bin
 $ cd $HOME/bin
 $ git clone https://github.com/mapbox/csv2geojson.git
@@ -41,6 +42,8 @@ $ brew install gdal
 $ brew install coreutils
 $ brew install findutils
 $ brew install tcsh
+$ brew doctor
+$ brew install node
 $ mkdir bin
 $ cd $HOME/bin
 $ git clone https://github.com/mapbox/csv2geojson.git
