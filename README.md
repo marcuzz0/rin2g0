@@ -25,6 +25,7 @@ Di seguito vengono riportati i passaggi per l'installazione delle dipendenze nec
 ```
 $ sudo apt-get update && sudo apt-get upgrade
 $ sudo apt-get install proj-bin
+$ sudo apt-get install gdal-bin
 $ sudo apt-get install tcsh
 $ mkdir bin
 $ cd $HOME/bin
@@ -35,6 +36,7 @@ $ echo "export PATH="$PATH:$HOME/bin/rin2go"" >> .bashrc
 ## Installazione per Mac OSX
 ```
 $ brew install proj
+$ brew install gdal
 $ brew install coreutils
 $ brew install findutils
 $ brew install tcsh
