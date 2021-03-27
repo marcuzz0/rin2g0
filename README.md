@@ -29,6 +29,7 @@ $ sudo apt-get install gdal-bin
 $ sudo apt-get install tcsh
 $ mkdir bin
 $ cd $HOME/bin
+$ git clone https://github.com/mapbox/csv2geojson.git
 $ git clone https://github.com/marcuzz0/rin2go.git
 $ echo "export PATH="$PATH:$HOME/bin/rin2go"" >> .bashrc
 ```
@@ -42,6 +43,7 @@ $ brew install findutils
 $ brew install tcsh
 $ mkdir bin
 $ cd $HOME/bin
+$ git clone https://github.com/mapbox/csv2geojson.git
 $ git clone https://github.com/marcuzz0/rin2go.git
 $ echo 'export PATH="$PATH:$HOME/bin/rin2go"' >> .bashrc
 ````
