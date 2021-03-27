@@ -43,6 +43,11 @@ $ echo 'export PATH="$PATH:$HOME/bin/rin2go"' >> .bashrc
 ````
 
 ## Come si utilizza
+
+- copiare i files rinex proprietari in formato *.ubx nella cartella $HOME/bin/run
+- far partire lo script con il comando:
 ```
 $ rin2go
 ```
+- alla richiesta del sito scegliere la stazione permanente dalla quale volete scaricare i files rinex della master
+

@@ -43,6 +43,9 @@ txtsfobianco=$(tput setab 7)  # sfondo carattere bianco
 #########################################################################################
 # CREAZIONE DELLE CARTELLE E SOTTOCARTELLE DI LAVORO
 #########################################################################################
+alias date='gdate'
+alias find='gfind'
+
 cd $PATH_DIR
 for file in `find -name *.ubx`; do
         mv $file $PATH_DIR
