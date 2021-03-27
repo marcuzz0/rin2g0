@@ -11,10 +11,10 @@ Più nel dettaglio lo script esegue i seguenti passaggi in sequenza:
 - rapporti finali in formato *.csv e *.kml
 
 Per lutilizzo dello script devono essere presenti ed installati i seguenti pacchetti software:
-- rtklib (www.rtklib.com)
-- cs2cs
-- pos2enu
-- csv2geojson
+- rtklib (https://www.rtklib.com)
+- cs2cs (https://proj.org/apps/cs2cs.html)
+- pos2enu (https://github.com/marcuzz0/pos2enu)
+- csv2geojson (https://github.com/mapbox/csv2geojson)
 
 Di seguito vengono riportati i passaggi per l'installazione delle dipendenze necessarie al corretto funzionamento dello script.
 NB: per il sistema operativo Windows 10 è necessario abilitare la bash di Windows, ad esempio (https://www.lffl.org/2016/08/guida-abilitare-la-bash-windows-10.html)
