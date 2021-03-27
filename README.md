@@ -5,7 +5,7 @@ Più nel dettaglio lo script esegue i seguenti passaggi in sequenza:
 
 - creazione delle cartelle di lavoro
 - conversione di files rinex (rover) in formato proprietario *.ubx in file rinex *.obs
-- download dei files rinex (master) dalla Rete FredNET e successiva conversione in file *.21o e *.21n
+- download dei files rinex (master) dalla Rete FredNET (OGS) e successiva conversione in file *.21o e *.21n
 - post-processing dei dei files rinex raccolti
 - media pesata (ponderata) dei risultati ottenuti e conversione in coordinate piane
 - rapporti finali in formato *.csv e *.kml
