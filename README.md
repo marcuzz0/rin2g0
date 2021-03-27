@@ -50,4 +50,11 @@ $ echo 'export PATH="$PATH:$HOME/bin/rin2go"' >> .bashrc
 $ rin2go
 ```
 - alla richiesta del sito scegliere la stazione permanente dalla quale volete scaricare i files rinex della master
+- al termine dell'elaborazione verrano visualizzati a video i rapporti con:
+	- coordinate piane dei punti (ALL) - file *csv*
+	- coordinate piane dei punti (FIX) - file *csv*
+	- coordinate geografiche dei punti (FIX) - file *csv*
+	- coordinate geografiche dei punti (FIX) - file *kml*
+	
+	
 
