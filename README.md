@@ -16,8 +16,10 @@ Per lutilizzo dello script devono essere presenti ed installati i seguenti pacch
 - pos2enu (https://github.com/marcuzz0/pos2enu)
 - csv2geojson (https://github.com/mapbox/csv2geojson)
 
+AVVERTENZE:
+- per il sistema operativo Windows 10 (è necessario abilitare la bash di Windows, ad esempio (https://www.lffl.org/2016/08/guida-abilitare-la-bash-windows-10.html))
+- per il sistema operativo Mac OSX (sono necessari gli alias per date(gdate) e find(gfind)
 Di seguito vengono riportati i passaggi per l'installazione delle dipendenze necessarie al corretto funzionamento dello script.
-NB: per il sistema operativo Windows 10 è necessario abilitare la bash di Windows, ad esempio (https://www.lffl.org/2016/08/guida-abilitare-la-bash-windows-10.html)
 
 ## Installazione per Debian, Ubuntu Linux, Windows 10
 ```
@@ -32,6 +34,8 @@ $ echo "export PATH="$PATH:$HOME/bin/rin2go"" >> .bashrc
 ## Installazione per Mac OSX
 ```
 $ brew install proj
+$ brew install coreutils
+$ brew install findutils
 $ mkdir bin
 $ cd $HOME/bin
 $ git clone https://github.com/marcuzz0/rin2go.git
