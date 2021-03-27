@@ -281,7 +281,7 @@ for file in $PATH_DIR/2-risultati/1-pos/*pos*; do
         | awk -F, '{printf ("%d ",$1); system ("echo "$2" "$3" "$4" \
         | cs2cs -f '%.8f' +init=epsg:32633 +to +init=epsg:4326")}' \
         | awk '{printf ("%5d\t",$1); printf("%10.8f\t%10.8f\t%8.3f\n", $3, $2, $4)}' \
-        | gawk '{print $1","$2","$3","$4}' >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv
+        | awk '{print $1","$2","$3","$4}' >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv
 done
 
 cat $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv | awk -F, BEGIN'{print "lat,lon,name"} {print $2","$3","$1}' \
