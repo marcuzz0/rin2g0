@@ -33,6 +33,9 @@ $ cd $HOME/bin
 $ git clone https://github.com/mapbox/csv2geojson.git
 $ git clone https://github.com/marcuzz0/rin2go.git
 $ echo "export PATH="$PATH:$HOME/bin/rin2go"" >> .bashrc
+$ export PATH="$HOME/bin/rin2go:$PATH"
+$ export PATH="$HOME/bin/rin2go/other:$PATH"
+$ export PATH="$HOME/bin/csv2geojson/other:$PATH"
 ```
 
 ## Installazione per Mac OSX
