@@ -1,1 +1,1 @@
-# gpsql
+# rin2go
