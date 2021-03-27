@@ -19,7 +19,7 @@ Per lutilizzo dello script devono essere presenti ed installati i seguenti pacch
 AVVERTENZE:
 - per il sistema operativo Windows 10 è necessario abilitare la bash di Windows, ad esempio (https://www.lffl.org/2016/08/guida-abilitare-la-bash-windows-10.html)
 - per il sistema operativo Mac OSX sono necessari gli alias per date(gdate) e find(gfind).
-Di seguito vengono riportati i passaggi per l'installazione delle dipendenze necessarie al corretto funzionamento dello script.
+Di seguito vengono riportati i passaggi per l'installazione delle dipendenze necessarie al corretto funzionamento dello script:
 
 ## Installazione per Debian, Ubuntu Linux, Windows 10
 ```
