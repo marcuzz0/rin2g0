@@ -9,7 +9,7 @@
 #########################################################################################
 ONLY_TITLE="rin2go"
 URL="frednet.crs.inogs.it/rinex_1s"
-PATH_CONF="$HOME/bin/rin2go/confs"
+PATH_CONF="$HOME/bin/rin2go/confs/static.conf"
 PATH_DIR="$HOME/bin/rin2go/run"
 TYPE_d="d"
 TYPE_n="n"
@@ -96,7 +96,7 @@ read
 clear
 echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
-echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Inserisci il sito dalla lista:${normale}
+echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Sito:${normale}
 
     1.  ${normale}${grassetto}acom ${grassetto}${txtverde}-> ${normale}Malborghetto (UD)
     2.  ${normale}${grassetto}afal ${grassetto}${txtverde}-> ${normale}Cortina D'Ampezzo (BL)
@@ -225,14 +225,14 @@ for i in `find -name *.obs`; do
       echo ""
       echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download del file ${grassetto}${txtsfogiallo}$SITE$DOY$VAR.$y$TYPE_d.Z...${normale}"
       wget ftp://$URL/$YEAR/$DOY/$HOUR/$SITE$DOY$VAR.$y$TYPE_d.Z
-  echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download del file ${grassetto}${txtsfociano}$SITE$DOY$VAR.$y$TYPE_d.Z...${normale}"
+      echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download del file ${grassetto}${txtsfociano}$SITE$DOY$VAR.$y$TYPE_d.Z...${normale}"
       wget ftp://$URL/$YEAR/$DOY/$HOUR/$SITE$DOY$VAR.$y$TYPE_n.Z
       mv $SITE$DOY$VAR.$y$TYPE_d.Z $PATH_FILE1
       mv $SITE$DOY$VAR.$y$TYPE_n.Z $PATH_FILE1
       gunzip $PATH_FILE1/*.Z
       CRX2RNX $PATH_FILE1/$SITE$DOY$VAR.$y$TYPE_d
       rm -fR $PATH_FILE1/$SITE$DOY$VAR.$y$TYPE_d
-      echo -e "Download file rinex\nServizio: Rete FREDNET (OGS)\nSito di: $SITE_COMPLETE\nData: $DATE\nIntervallo orario: $(($HOUR-1))-$HOUR (Ora UTC)" >> $PATH_FILE1/master.log
+      echo -e "Download file rinex\nServizio: Rete FREDNET (OGS)\nSito di: $SITE_COMPLETE\nData: $DATE\nIntervallo orario: $(($HOUR-1))-$HOUR (Ora UTC)" >> $PATH_FILE1/$SITE.log
 done
 
 #########################################################################################
