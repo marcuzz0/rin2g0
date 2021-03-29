@@ -8,10 +8,9 @@
 # VARIABILI
 #########################################################################################
 ONLY_TITLE="rin2go"
-BTITLE="$ONLY_TITLE 1.0 by MSeverin"
-PATH_CONF="$HOME/bin/rin2go/confs"
-PATH_DIR="$HOME/bin/rin2go/run"
 URL="frednet.crs.inogs.it/rinex_1s"
+PATH_CONF="$HOME/bin/rin2go/confs"
+PATH_DIR="$HOME/bin/rin2go/downloads"
 TYPE_d="d"
 TYPE_n="n"
 TYPE_g="g"
@@ -99,22 +98,22 @@ echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Inserisci il sito dalla lista:${normale}
 
-    1.  acom ${grassetto}${txtverde}->${normale} ${grassetto}Malborghetto (UD)${normale}
-    2.  afal ${grassetto}${txtverde}->${normale} ${grassetto}Cortina D'Ampezzo (BL)${normale}
-    3.  canv ${grassetto}${txtverde}->${normale} ${grassetto}Caneva (PN)${normale}
-    4.  codr ${grassetto}${txtverde}->${normale} ${grassetto}Codroipo (UD)${normale}
-    5.  fuse ${grassetto}${txtverde}->${normale} ${grassetto}Tolmezzo (UD)${normale}
-    6.  joan ${grassetto}${txtverde}->${normale} ${grassetto}Torreano di Cividale (UD)${normale}
-    7.  mdea ${grassetto}${txtverde}->${normale} ${grassetto}Medea (GO)${normale}
-    8.  mpra ${grassetto}${txtverde}->${normale} ${grassetto}Forgaria del Friuli (UD)${normale}
-    9.  nove ${grassetto}${txtverde}->${normale} ${grassetto}Noventa di Piave (VE)${normale}
-    10. pazo ${grassetto}${txtverde}->${normale} ${grassetto}Palazzolo dello Stella (UD)${normale}
-    11. pmnt ${grassetto}${txtverde}->${normale} ${grassetto}Sella Nevea (UD)${normale}
-    12. suse ${grassetto}${txtverde}->${normale} ${grassetto}Collalto di Susegana (TV)${normale}
-    13. trie ${grassetto}${txtverde}->${normale} ${grassetto}Sgonico (TS)${normale}
-    14. udi1 ${grassetto}${txtverde}->${normale} ${grassetto}Cussignacco (UD)${normale}
-    15. varm ${grassetto}${txtverde}->${normale} ${grassetto}Forni di Sopra (UD)${normale}
-    16. zouf ${grassetto}${txtverde}->${normale} ${grassetto}Cercivento (UD)${normale}
+    1.  ${normale}${grassetto}acom ${grassetto}${txtverde}-> ${normale}Malborghetto (UD)
+    2.  ${normale}${grassetto}afal ${grassetto}${txtverde}-> ${normale}Cortina D'Ampezzo (BL)
+    3.  ${normale}${grassetto}canv ${grassetto}${txtverde}-> ${normale}Caneva (PN)
+    4.  ${normale}${grassetto}codr ${grassetto}${txtverde}-> ${normale}Codroipo (UD)
+    5.  ${normale}${grassetto}fuse ${grassetto}${txtverde}-> ${normale}Tolmezzo (UD)
+    6.  ${normale}${grassetto}joan ${grassetto}${txtverde}-> ${normale}Torreano di Cividale (UD)
+    7.  ${normale}${grassetto}mdea ${grassetto}${txtverde}-> ${normale}Medea (GO)
+    8.  ${normale}${grassetto}mpra ${grassetto}${txtverde}-> ${normale}Forgaria del Friuli (UD)
+    9.  ${normale}${grassetto}nove ${grassetto}${txtverde}-> ${normale}Noventa di Piave (VE)
+    10. ${normale}${grassetto}pazo ${grassetto}${txtverde}-> ${normale}Palazzolo dello Stella (UD)
+    11. ${normale}${grassetto}pmnt ${grassetto}${txtverde}-> ${normale}Sella Nevea (UD)
+    12. ${normale}${grassetto}suse ${grassetto}${txtverde}-> ${normale}Collalto di Susegana (TV)
+    13. ${normale}${grassetto}trie ${grassetto}${txtverde}-> ${normale}Sgonico (TS)
+    14. ${normale}${grassetto}udi1 ${grassetto}${txtverde}-> ${normale}Cussignacco (UD)
+    15. ${normale}${grassetto}varm ${grassetto}${txtverde}-> ${normale}Forni di Sopra (UD)
+    16. ${normale}${grassetto}zouf ${grassetto}${txtverde}-> ${normale}Cercivento (UD)
 "
 read -p "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Fai una scelta (1 - 16):${normale} " choice
 case $choice in
@@ -150,8 +149,9 @@ case $choice in
                 ;;
         16)     SITE_COMPLETE="zouf - Cercivento (UD)"
                 ;;
-        *)      sleep 1
-                echo "Scelta errata!Riprova..."
+        *)      echo "${grassetto}${txtrosso}->${normale}${grassetto}${txtbianco}Scelta errata!Riprova...${normale} "
+                sleep 2
+                rin2go
                 ;;
 esac
 
