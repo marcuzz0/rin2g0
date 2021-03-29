@@ -10,7 +10,7 @@
 ONLY_TITLE="rin2go"
 URL="frednet.crs.inogs.it/rinex_1s"
 PATH_CONF="$HOME/bin/rin2go/confs"
-PATH_DIR="$HOME/bin/rin2go/downloads"
+PATH_DIR="$HOME/bin/rin2go/run"
 TYPE_d="d"
 TYPE_n="n"
 TYPE_g="g"
