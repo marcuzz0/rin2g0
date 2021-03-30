@@ -28,6 +28,7 @@ $ sudo apt-get install git
 $ sudo apt-get install proj-bin
 $ sudo apt-get install gdal-bin
 $ sudo apt-get install tcsh
+$ sudo apt-get install gawk
 $ sudo apt-get install gfortran
 $ sudo apt install npm
 $ sudo npm install -g csv2geojson
@@ -50,6 +51,7 @@ $ brew install git
 $ brew install coreutils
 $ brew install findutils
 $ brew install tcsh
+$ brew install gawk
 $ brew install gfortran
 $ brew doctor
 $ brew install node
