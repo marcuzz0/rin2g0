@@ -13,7 +13,7 @@ set PROGS       = (rtkrcv str2str rnx2rtkp convbin pos2kml)
 #set PROGS       = (convbin pos2kml)
 foreach PROG_VER ($PROG_VERS)
         echo "# $PROG_VER compiling."
-        set SRC_PATH    = ${HOME}/${PROG_VER}/app/consapp
+        set SRC_PATH    = ${HOME}/${PROG_VER}/bin/app/consapp
         foreach PROG ($PROGS)
                 cd ${SRC_PATH}/${PROG}/gcc
                 make clean
