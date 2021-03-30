@@ -50,9 +50,9 @@ for file in `find -name *.ubx`; do
         mv $file $PATH_DIR
 done
   rm -R -- */
-  mkdir 1-rover
+  mkdir 1-dati
   mkdir 2-risultati
-cd 1-rover
+cd 1-dati
   mkdir 1-ubx
   mkdir 2-rinex
 cd ../2-risultati
@@ -76,16 +76,16 @@ for file in *ubx*; do
         echo ""
         echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo la conversione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
         convbin -r ubx -od -os -oi -ot -f 5 "$file"
-        mv $file 1-rover/1-ubx
+        mv $file 1-dati/1-ubx
 done
 
 for file in *obs; do
-        mv $file 1-rover/2-rinex
+        mv $file 1-dati/2-rinex
 done
 for file in *nav* *sbs; do
         rm -fR $file *nav* *sbs
 done
-for file in 1-rover/2-rinex/*obs*; do
+for file in 1-dati/2-rinex/*obs*; do
         dir="${file%%.*}"
         mkdir $dir
         mv $file $dir
@@ -163,7 +163,7 @@ esac
 # DOWNLOAD DEI FILE RINEX DALLA RETE FRENET (OGS)
 #########################################################################################
 SITE=`echo $SITE_COMPLETE | awk '{print $1}'`
-cd $PATH_DIR/1-rover/2-rinex
+cd $PATH_DIR/1-dati/2-rinex
 for i in `find -name *.obs`; do
         YEAR=`cat "$i" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $1}'`
         MONTH=`cat "$i" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $2}'`
@@ -315,7 +315,7 @@ csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv \
 >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
 ogr2ogr -f "KML" $PATH_DIR/2-risultati/2-csv/wgs84_fix.kml \
 $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
-mv $PATH_DIR/2-risultati/2-csv/wgs84_fix.kml ../3-kml
+mv $PATH_DIR/2-risultati/2-csv/wgs84_fix.kml $PATH_DIR/2-risultati/3-kml
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
 
@@ -326,6 +326,6 @@ csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv \
 >> $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
 ogr2ogr -f "KML" $PATH_DIR/2-risultati/2-csv/wgs84_std.kml \
 $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
-mv $PATH_DIR/2-risultati/2-csv/wgs84_std.kml ../3-kml
+mv $PATH_DIR/2-risultati/2-csv/wgs84_std.kml $PATH_DIR/2-risultati/3-kml
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
