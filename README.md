@@ -67,10 +67,17 @@ $ rin2go
 ```
 - alla richiesta del sito scegliere la stazione permanente dalla quale volete scaricare i files rinex della master
 - al termine dell'elaborazione verrano visualizzati a video i rapporti con:
-	- coordinate piane dei punti (ALL) - file *csv*
-	- coordinate piane dei punti (FIX) - file *csv*
-	- coordinate geografiche dei punti (FIX) - file *csv*
-	- coordinate geografiche dei punti (FIX) - file *kml*
+	- coordinate piane dei punti 				
+	- coordinate piane dei punti (FIX) 			
+	- coordinate piane dei punti (STD) 			
+- verranno inoltre salvati i seguenti rapporti:
+	- coordinate piane dei punti 				- file *csv*
+	- coordinate piane dei punti (FIX) 			- file *csv*
+	- coordinate piane dei punti (STD) 			- file *csv*
+	- coordinate geografiche dei punti (FIX) 	- file *csv*
+	- coordinate geografiche dei punti (STD) 	- file *csv*
+	- coordinate geografiche dei punti (FIX) 	- file *kml*
+	- coordinate geografiche dei punti (STD) 	- file *kml*
 	
 	
 
