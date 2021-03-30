@@ -272,11 +272,15 @@ echo ""
 for i in `find -name *.obs`; do
         VAR0=$(basename "$i")
         VAR1="${VAR0%.*}"
-        XYZ=`cat "$i" | awk '/APPROX POSITION XYZ / {print}' | awk '{print $1","$2","$3}'`
+        XYZ=`cat "$i" | awk '/APPROX POSITION XYZ / {print}' | awk '{FS="\t"}; {print $1,$2,$3}'`
+        #Coordinate geografiche dei punti rilevati in STD derivate dal file rinex *.obs
         WGS84_STD=`xyz2wgs84 $XYZ`
-        echo $VAR1.std,$WGS84_STD #>> $PATH_DIR/2-risultati/2-csv/wgs84_std.csv
+        WGS84_STD2=`echo $WGS84_STD | awk '{FS="\t"}; {print $1","$2","$3}'`
+        echo $VAR1.std,$WGS84_STD2 >> $PATH_DIR/2-risultati/2-csv/wgs84_std.csv
+        #Coordinate piane dei punti rilevati in STD derivate dal file rinex *.obs
         ENU_STD=`xyz2enu $XYZ`
-        echo $VAR1.std,$ENU_STD #>> $PATH_DIR/2-risultati/2-csv/enu_std.csv
+        ENU_STD2=`echo $ENU_STD | awk '{FS="\t"}; {print $1","$2","$3}'`
+        echo $VAR1.std,$ENU_STD2 >> $PATH_DIR/2-risultati/2-csv/enu_std.csv
 done
 
 for file in ../../2-risultati/1-pos/*pos*; do
