@@ -10,7 +10,7 @@ Più nel dettaglio lo script esegue i seguenti passaggi in sequenza:
 - media pesata (ponderata) dei risultati ottenuti e conversione in coordinate piane
 - rapporti finali in formato *.csv e *.kml
 
-Per lutilizzo dello script devono essere presenti ed installati i seguenti pacchetti software:
+Per l'utilizzo dello script devono essere presenti ed installati i seguenti pacchetti software:
 - rtklib (https://www.rtklib.com)
 - cs2cs (https://proj.org/apps/cs2cs.html)
 - pos2enu (https://github.com/marcuzz0/pos2enu)
