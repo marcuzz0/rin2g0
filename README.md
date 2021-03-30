@@ -32,7 +32,6 @@ $ sudo apt install npm
 $ sudo npm install -g csv2geojson
 $ mkdir bin
 $ cd $HOME/bin
-$ https://github.com/rtklibexplorer/RTKLIB.git
 $ git clone https://github.com/marcuzz0/rin2go.git
 $ git clone https://github.com/mapbox/csv2geojson.git
 $ git clone https://github.com/rtklibexplorer/RTKLIB.git
