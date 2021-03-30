@@ -274,10 +274,10 @@ for file in ../../2-risultati/1-pos/*pos*; do
         pos2enu $file | awk '/FIX/ {print}' | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_fix.csv
 done
 
-echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane finali dei punti rilevati: ${normale}"
+echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane dei punti rilevati:${normale}"
 cat ../../2-risultati/2-csv/enu_full.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
 echo ""
-echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane finali dei punti rilevati: ${normale}${grassetto}${txtsfoverde}(FIX)${normale}"
+echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane dei punti rilevati:${normale}${grassetto}${txtsfoverde} (FIX)${normale}"
 cat ../../2-risultati/2-csv/enu_fix.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
 echo ""
 
