@@ -272,11 +272,11 @@ echo ""
 for i in `find -name *.obs`; do
         VAR0=$(basename "$i")
         VAR1="${VAR0%.*}"
-        XYZ=`cat "$i" | awk '/APPROX POSITION XYZ / {print}' | awk -v OFS='\t' '{print $1","$2","$3}'`
+        XYZ=`cat "$i" | awk '/APPROX POSITION XYZ / {print}' | awk '{print $1","$2","$3}'`
         WGS84_STD=`xyz2wgs84 $XYZ`
-        echo $VAR1.std,$WGS84_STD >> $PATH_DIR/2-risultati/2-csv/wgs84_std.csv
+        echo $VAR1.std,$WGS84_STD #>> $PATH_DIR/2-risultati/2-csv/wgs84_std.csv
         ENU_STD=`xyz2enu $XYZ`
-        echo $VAR1.std,$ENU_STD >> $PATH_DIR/2-risultati/2-csv/enu_std.csv
+        echo $VAR1.std,$ENU_STD #>> $PATH_DIR/2-risultati/2-csv/enu_std.csv
 done
 
 for file in ../../2-risultati/1-pos/*pos*; do
@@ -303,6 +303,7 @@ for file in $PATH_DIR/2-risultati/1-pos/*pos*; do
         | awk '{print $1","$2","$3","$4}' >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv
 done
 
+# Creazione del file *kml (FIX)
 cat $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv | awk -F, BEGIN'{print "lat,lon,name"} {print $2","$3","$1}' \
 >> $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv
 csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv \
