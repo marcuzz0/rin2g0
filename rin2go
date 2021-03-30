@@ -269,6 +269,16 @@ echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Rapportini finali...${normale}"
 echo ""
+for i in `find -name *.obs`; do
+        VAR0=$(basename "$i")
+        VAR1="${VAR0%.*}"
+        XYZ=`cat "$i" | awk '/APPROX POSITION XYZ / {print}' | awk -v OFS='\t' '{print $1, $2, $3}'`
+        WGS84_STD=`xyz2wgs84 $XYZ`
+        echo $VAR1.std  $WGS84_STD >> $PATH_DIR/2-risultati/2-csv/wgs84_std.csv
+        ENU_STD=`xyz2enu $XYZ`
+        echo $VAR1.std  $ENU_STD >> $PATH_DIR/2-risultati/2-csv/enu_std.csv
+done
+
 for file in ../../2-risultati/1-pos/*pos*; do
         pos2enu $file | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_full.csv
         pos2enu $file | awk '/FIX/ {print}' | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_fix.csv
@@ -278,6 +288,9 @@ echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate
 cat ../../2-risultati/2-csv/enu_full.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
 echo ""
 echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane dei punti rilevati:${normale}${grassetto}${txtsfoverde} (FIX)${normale}"
+cat ../../2-risultati/2-csv/enu_fix.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
+echo ""
+echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane dei punti rilevati:${normale}${grassetto}${txtsforosso} (STD)${normale}"
 cat ../../2-risultati/2-csv/enu_fix.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
 echo ""
 
