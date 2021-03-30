@@ -91,7 +91,7 @@ for file in 1-dati/2-rinex/*obs*; do
         mv $file $dir
 done
 echo ""
-echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Premi un tasto per procedere...${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Premi INVIO per procedere...${normale}"
 read
 
 #########################################################################################
