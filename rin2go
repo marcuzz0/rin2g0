@@ -250,10 +250,10 @@ for i in `find -name *.obs`; do
         VAR0=$(basename "$i")
         VAR1="${VAR0%.*}"
         #VAR2=`echo $i | awk -F"/" '{print $3}'`
-        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}->Eseguo l'elaborazione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
+        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo l'elaborazione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
         PATH_FILE2=`dirname "$i"`
         rnx2rtkp -k $PATH_CONF -o $i.pos $PATH_FILE2/*.obs $PATH_FILE2/*.21o $PATH_FILE2/*.21n
-        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtsfoverde}Completato!${normale}"
+        echo "${grassetto}${txtverde}  ${normale}${grassetto}${txtsfoverde}Completato!${normale}"
         rm -fR $PATH_FILE2/*.stat
         rm -fR $PATH_FILE2/*.obs_events.pos
         mv $PATH_FILE2/*.pos `echo $PATH_FILE2/*.pos | sed s/obs.pos/pos/g`
