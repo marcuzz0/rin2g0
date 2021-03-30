@@ -279,7 +279,7 @@ for i in `find -name *.obs`; do
         echo $VAR1.std,$WGS84_STD2 >> $PATH_DIR/2-risultati/2-csv/wgs84_std.csv
         #Coordinate piane dei punti rilevati in STD derivate dal file rinex *.obs
         ENU_STD=`xyz2enu $XYZ`
-        ENU_STD2=`echo $ENU_STD | awk '{FS="\t"}; {print $1","$2","$3}'`
+        ENU_STD2=`echo $ENU_STD | awk '{FS="\t"}; {print $1","$2","$3,""STD"}'`
         echo $VAR1.std,$ENU_STD2 >> $PATH_DIR/2-risultati/2-csv/enu_std.csv
 done
 
