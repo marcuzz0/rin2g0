@@ -24,6 +24,7 @@ Di seguito vengono riportati i passaggi per l'installazione delle dipendenze nec
 ## Installazione per Debian, Ubuntu Linux, Windows 10
 ```
 $ sudo apt-get update && sudo apt-get upgrade
+$ sudo apt-get install git
 $ sudo apt-get install proj-bin
 $ sudo apt-get install gdal-bin
 $ sudo apt-get install tcsh
@@ -43,6 +44,7 @@ $ export PATH="$HOME/bin/csv2geojson/other:$PATH"
 ```
 $ brew install proj
 $ brew install gdal
+$ brew install git
 $ brew install coreutils
 $ brew install findutils
 $ brew install tcsh
