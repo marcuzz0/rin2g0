@@ -58,6 +58,7 @@ cd 1-rover
 cd ../2-risultati
   mkdir 1-pos
   mkdir 2-csv
+  mkdir 3-kml
 cd
 
 #########################################################################################
@@ -314,6 +315,7 @@ csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv \
 >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
 ogr2ogr -f "KML" $PATH_DIR/2-risultati/2-csv/wgs84_fix.kml \
 $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
+mv $PATH_DIR/2-risultati/2-csv/wgs84_fix.kml ../3-kml
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
 
@@ -324,5 +326,6 @@ csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv \
 >> $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
 ogr2ogr -f "KML" $PATH_DIR/2-risultati/2-csv/wgs84_std.kml \
 $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
+mv $PATH_DIR/2-risultati/2-csv/wgs84_std.kml ../3-kml
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
