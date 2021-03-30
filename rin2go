@@ -70,11 +70,14 @@ echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Conversione dei file...${normale}"
 sleep 1
 for file in *ubx*; do
+        VAR0=$(basename "$file")
+        VAR1="${VAR0%.*}"
         echo ""
-        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo la conversione per il punto ${grassetto}${txtsforosso}$file${normale}"
+        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo la conversione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
         convbin -r ubx -od -os -oi -ot -f 5 "$file"
         mv $file 1-rover/1-ubx
 done
+
 for file in *obs; do
         mv $file 1-rover/2-rinex
 done
@@ -223,9 +226,9 @@ for i in `find -name *.obs`; do
       echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
       echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download dei file rinex...${normale}"
       echo ""
-      echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download del file ${grassetto}${txtsfogiallo}$SITE$DOY$VAR.$y$TYPE_d.Z...${normale}"
+      echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download del file ${grassetto}${txtsfoblu}$SITE$DOY$VAR.$y$TYPE_d.Z...${normale}"
       wget ftp://$URL/$YEAR/$DOY/$HOUR/$SITE$DOY$VAR.$y$TYPE_d.Z
-      echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download del file ${grassetto}${txtsfociano}$SITE$DOY$VAR.$y$TYPE_d.Z...${normale}"
+      echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download del file ${grassetto}${txtsfoblu}$SITE$DOY$VAR.$y$TYPE_d.Z...${normale}"
       wget ftp://$URL/$YEAR/$DOY/$HOUR/$SITE$DOY$VAR.$y$TYPE_n.Z
       mv $SITE$DOY$VAR.$y$TYPE_d.Z $PATH_FILE1
       mv $SITE$DOY$VAR.$y$TYPE_n.Z $PATH_FILE1
@@ -244,8 +247,10 @@ echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Post-Processing...${normale}"
 echo ""
 for i in `find -name *.obs`; do
-        VAR=`echo $i | awk -F"/" '{print $3}'`
-        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}->Eseguo l'elaborazione per il punto ${grassetto}${txtsfoverde}$VAR${normale}"
+        VAR0=$(basename "$i")
+        VAR1="${VAR0%.*}"
+        #VAR2=`echo $i | awk -F"/" '{print $3}'`
+        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}->Eseguo l'elaborazione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
         PATH_FILE2=`dirname "$i"`
         rnx2rtkp -k $PATH_CONF -o $i.pos $PATH_FILE2/*.obs $PATH_FILE2/*.21o $PATH_FILE2/*.21n
         echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}->Fatto!"
@@ -269,10 +274,10 @@ for file in ../../2-risultati/1-pos/*pos*; do
         pos2enu $file | awk '/FIX/ {print}' | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_fix.csv
 done
 
-echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Coordinate piane finali dei punti rilevati: ${normale}${grassetto}${txtsfoblu}(ALL)${normale}"
+echo "${grassetto}${txtverde}->${sottolineato}${normale}${grassetto}${txtbianco}Coordinate piane finali dei punti rilevati: ${normale}"
 cat ../../2-risultati/2-csv/enu_full.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
 echo ""
-echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Coordinate piane finali dei punti rilevati: ${normale}${grassetto}${txtsfoverde}(FIX)${normale}"
+echo "${grassetto}${txtverde}->${sottolineato}${normale}${grassetto}${txtbianco}Coordinate piane finali dei punti rilevati: ${normale}${grassetto}${txtsfoverde}(FIX)${normale}"
 cat ../../2-risultati/2-csv/enu_fix.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
 echo ""
 
