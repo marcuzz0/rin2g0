@@ -253,7 +253,7 @@ for i in `find -name *.obs`; do
         echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}->Eseguo l'elaborazione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
         PATH_FILE2=`dirname "$i"`
         rnx2rtkp -k $PATH_CONF -o $i.pos $PATH_FILE2/*.obs $PATH_FILE2/*.21o $PATH_FILE2/*.21n
-        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}->Fatto!"
+        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtsfoverde}Completato!${normale}"
         rm -fR $PATH_FILE2/*.stat
         rm -fR $PATH_FILE2/*.obs_events.pos
         mv $PATH_FILE2/*.pos `echo $PATH_FILE2/*.pos | sed s/obs.pos/pos/g`
@@ -274,10 +274,10 @@ for file in ../../2-risultati/1-pos/*pos*; do
         pos2enu $file | awk '/FIX/ {print}' | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_fix.csv
 done
 
-echo "${grassetto}${txtverde}->${sottolineato}${normale}${grassetto}${txtbianco}Coordinate piane finali dei punti rilevati: ${normale}"
+echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane finali dei punti rilevati: ${normale}"
 cat ../../2-risultati/2-csv/enu_full.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
 echo ""
-echo "${grassetto}${txtverde}->${sottolineato}${normale}${grassetto}${txtbianco}Coordinate piane finali dei punti rilevati: ${normale}${grassetto}${txtsfoverde}(FIX)${normale}"
+echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane finali dei punti rilevati: ${normale}${grassetto}${txtsfoverde}(FIX)${normale}"
 cat ../../2-risultati/2-csv/enu_fix.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
 echo ""
 
