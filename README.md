@@ -32,8 +32,10 @@ $ sudo apt install npm
 $ sudo npm install -g csv2geojson
 $ mkdir bin
 $ cd $HOME/bin
-$ git clone https://github.com/mapbox/csv2geojson.git
+$ https://github.com/rtklibexplorer/RTKLIB.git
 $ git clone https://github.com/marcuzz0/rin2go.git
+$ git clone https://github.com/mapbox/csv2geojson.git
+$ git clone https://github.com/rtklibexplorer/RTKLIB.git
 $ echo "export PATH="$PATH:$HOME/bin/rin2go"" >> .bashrc
 $ export PATH="$HOME/bin/rin2go:$PATH"
 $ export PATH="$HOME/bin/rin2go/other:$PATH"
@@ -53,8 +55,9 @@ $ brew install node
 $ sudo npm install -g csv2geojson
 $ mkdir bin
 $ cd $HOME/bin
-$ git clone https://github.com/mapbox/csv2geojson.git
 $ git clone https://github.com/marcuzz0/rin2go.git
+$ git clone https://github.com/mapbox/csv2geojson.git
+$ git clone https://github.com/rtklibexplorer/RTKLIB.git
 $ echo 'export PATH="$PATH:$HOME/bin/rin2go"' >> .bashrc
 ````
 

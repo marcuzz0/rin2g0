@@ -1,0 +1,22 @@
+#!/bin/tcsh
+# created by DZ (May 2015)
+#
+#********************  DEFAULTS ********************
+set JOB         = `basename $0`
+set USER        = `whoami`
+set CURDIR      = `pwd`
+#
+#********************  TUNING VARIABLES BEGIN ********************
+#set PROG_VERS  = (RTKLIB-master RTKLIB-rtklib_2.4.3)
+set PROG_VERS  = (RTKLIB)
+set PROGS       = (rtkrcv str2str rnx2rtkp convbin pos2kml)
+#set PROGS       = (convbin pos2kml)
+foreach PROG_VER ($PROG_VERS)
+        echo "# $PROG_VER compiling."
+        set SRC_PATH    = ${HOME}/${PROG_VER}/app/consapp
+        foreach PROG ($PROGS)
+                cd ${SRC_PATH}/${PROG}/gcc
+                make clean
+                make
+        end
+end
