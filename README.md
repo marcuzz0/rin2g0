@@ -32,7 +32,8 @@ $ sudo apt-get install gawk
 $ sudo apt-get install gfortran
 $ sudo apt install npm
 $ sudo npm install -g csv2geojson
-wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1rnXzvScONL01aMBqQG5ro_zsoUAiCH_M' -O CRX2RNX
+$ wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1rnXzvScONL01aMBqQG5ro_zsoUAiCH_M' -O CRX2RNX
+$ chmod a+x CRX2RNX
 $ mkdir bin
 $ cd $HOME/bin
 $ git clone https://github.com/marcuzz0/rin2go.git
@@ -42,6 +43,7 @@ $ echo "export PATH="$PATH:$HOME/bin/rin2go"" >> .bashrc
 $ export PATH="$HOME/bin/rin2go:$PATH"
 $ export PATH="$HOME/bin/rin2go/other:$PATH"
 $ export PATH="$HOME/bin/csv2geojson/other:$PATH"
+$ chmod a+x rin2go
 ```
 
 ## Installazione per Mac OSX
@@ -57,13 +59,15 @@ $ brew install gfortran
 $ brew doctor
 $ brew install node
 $ sudo npm install -g csv2geojson
-wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1dlcmeCMAAyX8fsQTWX0bE5MW4N7Sbc04' -O CRX2RNX
+$ wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1dlcmeCMAAyX8fsQTWX0bE5MW4N7Sbc04' -O CRX2RNX
+$ chmod a+x CRX2RNX
 $ mkdir bin
 $ cd $HOME/bin
 $ git clone https://github.com/marcuzz0/rin2go.git
 $ git clone https://github.com/mapbox/csv2geojson.git
 $ git clone https://github.com/rtklibexplorer/RTKLIB.git
 $ echo 'export PATH="$PATH:$HOME/bin/rin2go"' >> .bashrc
+$ chmod a+x rin2go
 ````
 
 ## Come si utilizza
