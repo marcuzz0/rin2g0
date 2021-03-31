@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# versione 	1.0
+# data 		31/03/2021
+# autore	MSeverin
+#
+#********************  DEFAULTS ********************
+JOB=`basename $0`
+USER=`whoami`
+CURDIR=`pwd`
+#********************  TUNING VARIABLES BEGIN ********************
+PROG_VERS=(RTKLIB)
+PROGS=(convbin rnx2rtkp)
+  for PROG_VER ($PROG_VERS) do
+        echo "# $PROG_VER compiling."
+        SRC_PATH="${HOME}/bin/${PROG_VER}/app/consapp"
+            for PROG($PROGS) do
+                    cd ${SRC_PATH}/${PROG}/gcc
+                    make clean
+                    make
+                    sudo make install
+            done
+  done
