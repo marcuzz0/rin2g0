@@ -41,6 +41,7 @@ sudo apt-get install gawk
 sudo apt-get install gfortran
 sudo apt install npm
 sudo npm install -g csv2geojson
+sudo apt autoremove
 
 #########################################################################################
 # INSTALLAZIONE RTKLIB PACCHETTI CONVBIN,RNX2RTKP
