@@ -62,9 +62,11 @@ chmod a+x CRX2RNX
 #########################################################################################
 # AGGIUNTA DEI PATH
 #########################################################################################
-export PATH=$PATH:$HOME/bin/rin2go:$PATH
-export PATH=$PATH:$HOME/bin/rin2go/other:$PATH
-export PATH=$PATH:$HOME/bin/rin2go/install:$PATH
+export "PATH=$PATH:$HOME/bin"
+export "PATH=$PATH:$HOME/bin/rin2go/"
+export "PATH=$PATH:$HOME/bin/rin2go/install"
+export "PATH=$PATH:$HOME/bin/rin2go/other"
+
 
 #########################################################################################
 # INSTALLAZIONE PACCHETTI TCSH,GIT,PROJ,GDAL,GAWK,GFORTRAN,NPM,CSV2GEOJSON
