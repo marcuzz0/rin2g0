@@ -94,7 +94,7 @@ echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE RTKLIB PACCHETTI CONVBIN,RNX2RTKP...${normale}"
 echo ""
-rtklibmake
+rtkli_install
 
 #########################################################################################
 # PERMESSI DI ESECUZIONE ALLO SCRIPT
