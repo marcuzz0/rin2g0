@@ -46,9 +46,7 @@ alias date='gdate'
 alias find='gfind'
 
 cd $PATH_DIR
-for file in `find -name *.ubx`; do
-        mv $file $PATH_DIR
-done
+  for file in `find -name *.ubx`; do mv $file $PATH_DIR; done
   rm -R -- */
   mkdir 1-dati
   mkdir 2-risultati
@@ -70,26 +68,22 @@ echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Conversione dei file...${normale}"
 sleep 1
-for file in *ubx*; do
-        VAR0=$(basename "$file")
-        VAR1="${VAR0%.*}"
-        echo ""
-        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo la conversione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
-        convbin -r ubx -od -os -oi -ot -f 5 "$file"
-        mv $file 1-dati/1-ubx
-done
+  for file in *ubx*; do
+           VAR0=$(basename "$file")
+           VAR1="${VAR0%.*}"
+           echo ""
+           echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo la conversione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
+           convbin -r ubx -od -os -oi -ot -f 5 "$file"
+           mv $file 1-dati/1-ubx
+  done
 
-for file in *obs; do
-        mv $file 1-dati/2-rinex
-done
-for file in *nav* *sbs; do
-        rm -fR $file *nav* *sbs
-done
-for file in 1-dati/2-rinex/*obs*; do
-        dir="${file%%.*}"
-        mkdir $dir
-        mv $file $dir
-done
+  for file in *obs; do mv $file 1-dati/2-rinex; done
+  for file in *nav* *sbs; do rm -fR $file *nav* *sbs; done
+  for file in 1-dati/2-rinex/*obs*; do
+           dir="${file%%.*}"
+           mkdir $dir
+           mv $file $dir
+  done
 echo ""
 echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Premi INVIO per procedere...${normale}"
 read
@@ -120,7 +114,7 @@ echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Sito:${normale}
     16. ${normale}${grassetto}zouf ${grassetto}${txtverde}-> ${normale}Cercivento (UD)
 "
 read -p "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Fai una scelta (1 - 16):${normale} " choice
-case $choice in
+  case $choice in
         1)      SITE_COMPLETE="acom - Malborghetto (UD)"
                 ;;
         2)      SITE_COMPLETE="afal - Cortina D'Ampezzo (BL)"
@@ -164,64 +158,64 @@ esac
 #########################################################################################
 SITE=`echo $SITE_COMPLETE | awk '{print $1}'`
 cd $PATH_DIR/1-dati/2-rinex
-for i in `find -name *.obs`; do
-        YEAR=`cat "$i" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $1}'`
-        MONTH=`cat "$i" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $2}'`
-        DAY=`cat "$i" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $3}'`
-        HOUR=`cat "$i" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $4+1}'`
-        PATH_FILE1=`dirname "$i"`
-        DATE="$YEAR-$MONTH-$DAY"
-        DOY=`date -d "$DATE" +%j`
-        y=`date -d "$DATE" +%y`
-            if [ $HOUR = "01" ]; then
-              VAR="a"
-          elif [ $HOUR = "02" ]; then
-              VAR="b"
-          elif [ $HOUR = "03" ]; then
-              VAR="c"
-          elif [ $HOUR = "04" ]; then
-              VAR="d"
-          elif [ $HOUR = "05" ]; then
-              VAR="e"
-          elif [ $HOUR = "06" ]; then
-              VAR="f"
-          elif [ $HOUR = "07" ]; then
-              VAR="g"
-          elif [ $HOUR = "08" ]; then
-              VAR="h"
-          elif [ $HOUR = "09" ]; then
-              VAR="i"
-          elif [ $HOUR = "10" ]; then
-              VAR="j"
-          elif [ $HOUR = "11" ]; then
-              VAR="k"
-          elif [ $HOUR = "12" ]; then
-              VAR="l"
-          elif [ $HOUR = "13" ]; then
-              VAR="m"
-          elif [ $HOUR = "14" ]; then
-              VAR="n"
-          elif [ $HOUR = "15" ]; then
-              VAR="o"
-          elif [ $HOUR = "16" ]; then
-              VAR="p"
-          elif [ $HOUR = "17" ]; then
-              VAR="q"
-          elif [ $HOUR = "18" ]; then
-              VAR="r"
-          elif [ $HOUR = "19" ]; then
-              VAR="s"
-          elif [ $HOUR = "20" ]; then
-              VAR="t"
-          elif [ $HOUR = "21" ]; then
-              VAR="u"
-          elif [ $HOUR = "22" ]; then
-              VAR="v"
-          elif [ $HOUR = "23" ]; then
-              VAR="w"
-          elif [ $HOUR = "24" ]; then
-              VAR="x"
-          fi
+  for file in `find -name *.obs`; do
+           YEAR=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $1}'`
+           MONTH=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $2}'`
+           DAY=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $3}'`
+           HOUR=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $4+1}'`
+           PATH_FILE1=`dirname "$file"`
+           DATE="$YEAR-$MONTH-$DAY"
+           DOY=`date -d "$DATE" +%j`
+           y=`date -d "$DATE" +%y`
+                if [ $HOUR = "01" ]; then
+                      VAR="a"
+              elif [ $HOUR = "02" ]; then
+                      VAR="b"
+              elif [ $HOUR = "03" ]; then
+                      VAR="c"
+              elif [ $HOUR = "04" ]; then
+                      VAR="d"
+              elif [ $HOUR = "05" ]; then
+                      VAR="e"
+              elif [ $HOUR = "06" ]; then
+                      VAR="f"
+              elif [ $HOUR = "07" ]; then
+                      VAR="g"
+              elif [ $HOUR = "08" ]; then
+                      VAR="h"
+              elif [ $HOUR = "09" ]; then
+                      VAR="i"
+              elif [ $HOUR = "10" ]; then
+                      VAR="j"
+              elif [ $HOUR = "11" ]; then
+                      VAR="k"
+              elif [ $HOUR = "12" ]; then
+                      VAR="l"
+              elif [ $HOUR = "13" ]; then
+                      VAR="m"
+              elif [ $HOUR = "14" ]; then
+                      VAR="n"
+              elif [ $HOUR = "15" ]; then
+                      VAR="o"
+              elif [ $HOUR = "16" ]; then
+                      VAR="p"
+              elif [ $HOUR = "17" ]; then
+                      VAR="q"
+              elif [ $HOUR = "18" ]; then
+                      VAR="r"
+              elif [ $HOUR = "19" ]; then
+                      VAR="s"
+              elif [ $HOUR = "20" ]; then
+                      VAR="t"
+              elif [ $HOUR = "21" ]; then
+                      VAR="u"
+              elif [ $HOUR = "22" ]; then
+                      VAR="v"
+              elif [ $HOUR = "23" ]; then
+                      VAR="w"
+              elif [ $HOUR = "24" ]; then
+                      VAR="x"
+              fi
       clear
       echo ""
       echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
@@ -245,7 +239,6 @@ done
 MLAT=`cat stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $1}'`
 MLON=`cat stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $2}'`
 MHEI=`cat stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $3}'`
-
       if [ $SITE="acom" ]; then
             cat static.conf \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
@@ -335,19 +328,18 @@ echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Post-Processing...${normale}"
 echo ""
-for i in `find -name *.obs`; do
-        VAR0=$(basename "$i")
-        VAR1="${VAR0%.*}"
-        #VAR2=`echo $i | awk -F"/" '{print $3}'`
-        echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo l'elaborazione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
-        PATH_FILE2=`dirname "$i"`
-        rnx2rtkp -k $PATH_CONF -o $i.pos $PATH_FILE2/*.obs $PATH_FILE2/*.21o $PATH_FILE2/*.21n
-        echo "${grassetto}${txtverde}  ${normale}${grassetto}${txtsfoverde}Completato!${normale}"
-        rm -fR $PATH_FILE2/*.stat
-        rm -fR $PATH_FILE2/*.obs_events.pos
-        mv $PATH_FILE2/*.pos `echo $PATH_FILE2/*.pos | sed s/obs.pos/pos/g`
-        mv $PATH_FILE2/*.pos ../../2-risultati/1-pos/
-done
+  for file in `find -name *.obs`; do
+           VAR0=$(basename "$file")
+           VAR1="${VAR0%.*}"
+           echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo l'elaborazione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
+           PATH_FILE2=`dirname "$file"`
+           rnx2rtkp -k $PATH_CONF -o $file.pos $PATH_FILE2/*.obs $PATH_FILE2/*.21o $PATH_FILE2/*.21n
+           echo "${grassetto}${txtverde}  ${normale}${grassetto}${txtsfoverde}Completato!${normale}"
+           rm -fR $PATH_FILE2/*.stat
+           rm -fR $PATH_FILE2/*.obs_events.pos
+           mv $PATH_FILE2/*.pos `echo $PATH_FILE2/*.pos | sed s/obs.pos/pos/g`
+           mv $PATH_FILE2/*.pos ../../2-risultati/1-pos/
+  done
 sleep 2
 
 #########################################################################################
@@ -358,10 +350,10 @@ echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Rapportini finali...${normale}"
 echo ""
-for i in `find -name *.obs`; do
-        VAR0=$(basename "$i")
+  for file in `find -name *.obs`; do
+        VAR0=$(basename "$file")
         VAR1="${VAR0%.*}"
-        XYZ=`cat "$i" | awk '/APPROX POSITION XYZ / {print}' | awk '{FS="\t"}; {print $1,$2,$3}'`
+        XYZ=`cat "$file" | awk '/APPROX POSITION XYZ / {print}' | awk '{FS="\t"}; {print $1,$2,$3}'`
         #Coordinate geografiche dei punti rilevati in STD derivate dal file rinex *.obs
         WGS84_STD=`xyz2wgs84 $XYZ`
         WGS84_STD2=`echo $WGS84_STD | awk '{FS="\t"}; {print $1","$2","$3}'`
@@ -370,12 +362,12 @@ for i in `find -name *.obs`; do
         ENU_STD=`xyz2enu $XYZ`
         ENU_STD2=`echo $ENU_STD | awk '{FS="\t"}; {print $1","$2","$3",""STD"}'`
         echo $VAR1.std,$ENU_STD2 >> $PATH_DIR/2-risultati/2-csv/enu_std.csv
-done
+  done
 
-for file in ../../2-risultati/1-pos/*pos*; do
-        pos2enu $file | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_full.csv
-        pos2enu $file | awk '/FIX/ {print}' | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_fix.csv
-done
+  for file in ../../2-risultati/1-pos/*pos*; do
+           pos2enu $file | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_full.csv
+           pos2enu $file | awk '/FIX/ {print}' | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_fix.csv
+  done
 
 echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane dei punti rilevati:${normale}"
 cat ../../2-risultati/2-csv/enu_full.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
@@ -387,14 +379,14 @@ echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate
 cat ../../2-risultati/2-csv/enu_std.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
 echo ""
 
-for file in $PATH_DIR/2-risultati/1-pos/*pos*; do
-        ENU=`pos2enu $file | awk '/FIX/ {print}' | awk '{print $1","$2","$3","$4","$5}'`
-        echo $ENU \
-        | awk -F, '{printf ("%d ",$1); system ("echo "$2" "$3" "$4" \
-        | cs2cs -f '%.8f' +init=epsg:32633 +to +init=epsg:4326")}' \
-        | awk '{printf ("%5d\t",$1); printf("%10.8f\t%10.8f\t%8.3f\n", $3, $2, $4)}' \
-        | awk '{print $1","$2","$3","$4}' >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv
-done
+  for file in $PATH_DIR/2-risultati/1-pos/*pos*; do
+           ENU=`pos2enu $file | awk '/FIX/ {print}' | awk '{print $1","$2","$3","$4","$5}'`
+           echo $ENU \
+           | awk -F, '{printf ("%d ",$1); system ("echo "$2" "$3" "$4" \
+           | cs2cs -f '%.8f' +init=epsg:32633 +to +init=epsg:4326")}' \
+           | awk '{printf ("%5d\t",$1); printf("%10.8f\t%10.8f\t%8.3f\n", $3, $2, $4)}' \
+           | awk '{print $1","$2","$3","$4}' >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv
+  done
 
 # Creazione del file *kml (FIX)
 cat $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv | awk -F, BEGIN'{print "lat,lon,name"} {print $2","$3","$1}' \
