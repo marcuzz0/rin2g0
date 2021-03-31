@@ -13,8 +13,8 @@ PATH_CONF="$HOME/bin/rin2go/confs/static.conf"
 PATH_DIR="$HOME/bin/rin2go/run"
 TYPE_d="d"
 TYPE_n="n"
-TYPE_g="g"
-TYPE_s="s"
+#TYPE_g="g"
+#TYPE_s="s"
 
 #########################################################################################
 # VARIABILI DI FORMATTAZIONE
