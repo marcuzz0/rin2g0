@@ -1,0 +1,48 @@
+#!/bin/bash
+#
+# versione 	1.0
+# data 		18/03/2021
+# autore	MSeverin
+#
+#########################################################################################
+# AGGIORNAMENTO DEL SISTEMA
+#########################################################################################
+sudo apt-get update && sudo apt-get upgrade
+
+#########################################################################################
+# CREAZIONE DIRECTORY BIN, SCARICAMENTO PACCHETTI GIT DI RIN2GO,CSV2GEOJSON,RTKLIB,CRX2RNX
+#########################################################################################
+mkdir bin
+cd HOME/bin
+
+#########################################################################################
+# SCARICAMENTO PACCHETTI GIT DI RIN2GO,CSV2GEOJSON,RTKLIB,CRX2RNX
+#########################################################################################
+git clone https://github.com/marcuzz0/rin2go.git
+git clone https://github.com/mapbox/csv2geojson.git
+git clone https://github.com/rtklibexplorer/RTKLIB.git
+cd rin2go/other/
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1rnXzvScONL01aMBqQG5ro_zsoUAiCH_M' -O CRX2RNX
+chmod a+x CRX2RNX
+cd
+sudo nano .bashrc
+    PATH="HOME/bin/rin2go:PATH"
+    PATH="HOME/bin/rin2go/other:PATH"
+    PATH="HOME/bin/csv2geojson/other:PATH"
+
+#########################################################################################
+# INSTALLAZIONE PACCHETTI TCSH,GIT,PROJ,GDAL,GAWK,GFORTRAN,NPM,CSV2GEOJSON
+#########################################################################################
+sudo apt-get install tcsh
+sudo apt-get install git
+sudo apt-get install proj-bin
+sudo apt-get install gdal-bin
+sudo apt-get install gawk
+sudo apt-get install gfortran
+sudo apt install npm
+sudo npm install -g csv2geojson
+
+#########################################################################################
+# PERMESSI DI ESECUZIONE ALLO SCRIPT
+#########################################################################################
+#chmod a+x rin2go
