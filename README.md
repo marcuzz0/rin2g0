@@ -23,7 +23,7 @@ Di seguito vengono riportati i passaggi per l'installazione delle dipendenze nec
 
 ## Installazione per Debian, Ubuntu Linux, Windows 10
 ```
-cd $HOME
+$ cd $HOME
 $ mkdir bin
 $ cd $HOME/bin
 $ git clone https://github.com/marcuzz0/rin2go.git
