@@ -14,7 +14,6 @@ sudo apt-get update && sudo apt-get upgrade
 # SCARICAMENTO PACCHETTI GIT DI RIN2GO,CSV2GEOJSON,RTKLIB,CRX2RNX
 #########################################################################################
 clear
-git clone https://github.com/marcuzz0/rin2go.git
 git clone https://github.com/mapbox/csv2geojson.git
 git clone https://github.com/rtklibexplorer/RTKLIB.git
 cd rin2go/other/
