@@ -13,7 +13,7 @@ sudo apt-get update && sudo apt-get upgrade
 # CREAZIONE DIRECTORY BIN, SCARICAMENTO PACCHETTI GIT DI RIN2GO,CSV2GEOJSON,RTKLIB,CRX2RNX
 #########################################################################################
 mkdir bin
-cd HOME/bin
+cd $HOME/bin
 
 #########################################################################################
 # SCARICAMENTO PACCHETTI GIT DI RIN2GO,CSV2GEOJSON,RTKLIB,CRX2RNX
@@ -22,13 +22,17 @@ git clone https://github.com/marcuzz0/rin2go.git
 git clone https://github.com/mapbox/csv2geojson.git
 git clone https://github.com/rtklibexplorer/RTKLIB.git
 cd rin2go/other/
-wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1rnXzvScONL01aMBqQG5ro_zsoUAiCH_M' -O CRX2RNX
+wget --no-check-certificate \
+'https://drive.google.com/uc?export=download&id=1rnXzvScONL01aMBqQG5ro_zsoUAiCH_M' \
+-O CRX2RNX
 chmod a+x CRX2RNX
-cd
-sudo nano .bashrc
-    PATH="HOME/bin/rin2go:PATH"
-    PATH="HOME/bin/rin2go/other:PATH"
-    PATH="HOME/bin/csv2geojson/other:PATH"
+
+#########################################################################################
+# AGGIUNTA DEI PATH
+#########################################################################################
+export PATH="$PATH:$HOME/bin/rin2go"
+export PATH="$PATH:$HOME/bin/rin2go/other"
+export PATH="$PATH:$HOME/bin/rin2go/install"
 
 #########################################################################################
 # INSTALLAZIONE PACCHETTI TCSH,GIT,PROJ,GDAL,GAWK,GFORTRAN,NPM,CSV2GEOJSON
