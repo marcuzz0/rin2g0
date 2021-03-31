@@ -1,23 +1,19 @@
 #!/bin/bash
 #
-# versione 	1.0
-# data 		18/03/2021
+# Pacchetto installazione per linux di rin2go
+# data 		31/03/2021
 # autore	MSeverin
 #
 #########################################################################################
 # AGGIORNAMENTO DEL SISTEMA
 #########################################################################################
+clear
 sudo apt-get update && sudo apt-get upgrade
-
-#########################################################################################
-# CREAZIONE DIRECTORY BIN, SCARICAMENTO PACCHETTI GIT DI RIN2GO,CSV2GEOJSON,RTKLIB,CRX2RNX
-#########################################################################################
-mkdir bin
-cd $HOME/bin
 
 #########################################################################################
 # SCARICAMENTO PACCHETTI GIT DI RIN2GO,CSV2GEOJSON,RTKLIB,CRX2RNX
 #########################################################################################
+clear
 git clone https://github.com/marcuzz0/rin2go.git
 git clone https://github.com/mapbox/csv2geojson.git
 git clone https://github.com/rtklibexplorer/RTKLIB.git
@@ -37,6 +33,7 @@ export PATH="$PATH:$HOME/bin/rin2go/install"
 #########################################################################################
 # INSTALLAZIONE PACCHETTI TCSH,GIT,PROJ,GDAL,GAWK,GFORTRAN,NPM,CSV2GEOJSON
 #########################################################################################
+clear
 sudo apt-get install tcsh
 sudo apt-get install git
 sudo apt-get install proj-bin
@@ -45,6 +42,12 @@ sudo apt-get install gawk
 sudo apt-get install gfortran
 sudo apt install npm
 sudo npm install -g csv2geojson
+
+#########################################################################################
+# INSTALLAZIONE RTKLIB PACCHETTI CONVBIN,RNX2RTKP
+#########################################################################################
+clear
+rtklibmake
 
 #########################################################################################
 # PERMESSI DI ESECUZIONE ALLO SCRIPT

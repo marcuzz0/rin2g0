@@ -23,28 +23,12 @@ Di seguito vengono riportati i passaggi per l'installazione delle dipendenze nec
 
 ## Installazione per Debian, Ubuntu Linux, Windows 10
 ```
-$ sudo apt-get update && sudo apt-get upgrade
-$ sudo apt-get install git
-$ sudo apt-get install proj-bin
-$ sudo apt-get install gdal-bin
-$ sudo apt-get install tcsh
-$ sudo apt-get install gawk
-$ sudo apt-get install gfortran
-$ sudo apt install npm
-$ sudo npm install -g csv2geojson
+cd $HOME
 $ mkdir bin
 $ cd $HOME/bin
 $ git clone https://github.com/marcuzz0/rin2go.git
-$ git clone https://github.com/mapbox/csv2geojson.git
-$ git clone https://github.com/rtklibexplorer/RTKLIB.git
-$ cd rin2go/other/
-$ wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1rnXzvScONL01aMBqQG5ro_zsoUAiCH_M' -O CRX2RNX
-$ chmod a+x CRX2RNX
-$ echo "export PATH="$PATH:$HOME/bin/rin2go"" >> .bashrc
-$ export PATH="$HOME/bin/rin2go:$PATH"
-$ export PATH="$HOME/bin/rin2go/other:$PATH"
-$ export PATH="$HOME/bin/csv2geojson/other:$PATH"
-$ chmod a+x rin2go
+$ cd rin2go/install
+$ rin2go_linux_x86_64bit
 ```
 
 ## Installazione per Mac OSX
