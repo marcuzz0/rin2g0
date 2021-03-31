@@ -5,15 +5,51 @@
 # autore	MSeverin
 #
 #########################################################################################
+# VARIABILI
+#########################################################################################
+ONLY_TITLE="Pacchetto di installazione per linux di rin2go"
+
+#########################################################################################
+# VARIABILI DI FORMATTAZIONE
+#########################################################################################
+sottolineato=$(tput smul)     # attiva il sottolineato
+nonsottolineato=$(tput rmul)  # disattiva il sottolineato
+grassetto=$(tput bold)        # attiva il grassetto
+inverso=$(tput rev)           # attiva la modalità inversa
+normale=$(tput sgr0)          # annulla tutti gli effetti e torna al default
+txtrosso=$(tput setaf 1)      # carattere rosso
+txtverde=$(tput setaf 2)      # carattere verde
+txtgiallo=$(tput setaf 3)     # carattere giallo
+txtblu=$(tput setaf 4)        # carattere blu
+txtporpora=$(tput setaf 5)    # carattere porpora
+txtciano=$(tput setaf 6)      # carattere ciano (azzurro)
+txtbianco=$(tput setaf 7)     # carattere bianco
+txtsforosso=$(tput setab 1)   # sfondo carattere rosso
+txtsfoverde=$(tput setab 2)   # sfondo carattere verde
+txtsfogiallo=$(tput setab 3)  # sfondo carattere giallo
+txtsfoblu=$(tput setab 4)     # sfondo carattere blu
+txtsfoporpora=$(tput setab 5) # sfondo carattere porpora
+txtsfociano=$(tput setab 6)   # sfondo carattere ciano (azzurro)
+txtsfobianco=$(tput setab 7)  # sfondo carattere bianco
+
+#########################################################################################
 # AGGIORNAMENTO DEL SISTEMA
 #########################################################################################
 clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}AGGIORNAMENTO DEL SISTEMA...${normale}"
+echo ""
 sudo apt-get update && sudo apt-get upgrade
 
 #########################################################################################
 # SCARICAMENTO PACCHETTI GIT DI RIN2GO,CSV2GEOJSON,RTKLIB,CRX2RNX
 #########################################################################################
 clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}SCARICAMENTO PACCHETTI GIT DI RIN2GO,CSV2GEOJSON,RTKLIB,CRX2RNX...${normale}"
+echo ""
 cd $HOME/bin
 git clone https://github.com/mapbox/csv2geojson.git
 git clone https://github.com/rtklibexplorer/RTKLIB.git
@@ -34,6 +70,10 @@ export PATH="$PATH:$HOME/bin/rin2go/install"
 # INSTALLAZIONE PACCHETTI TCSH,GIT,PROJ,GDAL,GAWK,GFORTRAN,NPM,CSV2GEOJSON
 #########################################################################################
 clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE PACCHETTI TCSH,GIT,PROJ,GDAL,GAWK,GFORTRAN,NPM,CSV2GEOJSON...${normale}"
+echo ""
 sudo apt-get install tcsh
 sudo apt-get install git
 sudo apt-get install proj-bin
@@ -48,6 +88,10 @@ sudo apt autoremove
 # INSTALLAZIONE RTKLIB PACCHETTI CONVBIN,RNX2RTKP
 #########################################################################################
 clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE RTKLIB PACCHETTI CONVBIN,RNX2RTKP...${normale}"
+echo ""
 rtklibmake
 
 #########################################################################################
