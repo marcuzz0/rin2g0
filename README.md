@@ -27,8 +27,7 @@ $ cd $HOME
 $ mkdir bin
 $ cd $HOME/bin
 $ git clone https://github.com/marcuzz0/rin2go.git
-$ cd rin2go/install
-$ ./rin2go_linux_x86_64bit
+$ ./rin2go/install/rin2go_linux_x86_64bit
 ```
 
 ## Installazione per Mac OSX
