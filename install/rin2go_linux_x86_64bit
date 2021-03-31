@@ -43,7 +43,7 @@ echo ""
 sudo apt-get update && sudo apt-get upgrade
 
 #########################################################################################
-# SCARICAMENTO PACCHETTI GIT DI RIN2GO,CSV2GEOJSON,RTKLIB,CRX2RNX
+# SCARICAMENTO PACCHETTI GIT DI CSV2GEOJSON,RTKLIB,CRX2RNX
 #########################################################################################
 clear
 echo ""
