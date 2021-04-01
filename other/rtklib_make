@@ -18,5 +18,6 @@ foreach PROG_VER ($PROG_VERS)
                 cd ${SRC_PATH}/${PROG}/gcc
                 make clean
                 make
+                sudo make install
         end
 end
