@@ -236,86 +236,86 @@ done
 #########################################################################################
 # INSERIMENTO NEL FILE *.conf DELLE COORDINATE DELLA MASTER
 #########################################################################################
-MLAT=`cat stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $1}'`
-MLON=`cat stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $2}'`
-MHEI=`cat stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $3}'`
+MLAT=`cat $HOME/bin/rin2go/confs/stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $1}'`
+MLON=`cat $HOME/bin/rin2go/confs/stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $2}'`
+MHEI=`cat $HOME/bin/rin2go/confs/stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $3}'`
       if [ $SITE="acom" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="afal" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="canv" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="codr" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="fuse" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="joan" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="mdea" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="mpra" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="nove" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="pazo" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="pmnt" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="suse" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="trie" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="udi1" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="varm" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
       elif [ $SITE="zouf" ]; then
-            cat static.conf \
+            cat $PATH_CONF \
                   | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
                   | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
                   | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
