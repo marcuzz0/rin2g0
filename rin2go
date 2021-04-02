@@ -73,7 +73,14 @@ sleep 1
            VAR1="${VAR0%.*}"
            echo ""
            echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo la conversione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
-           convbin -r ubx -od -os -oi -ot -f 5 "$file"
+              convbin \
+                -r ubx \
+                -od \
+                -os \
+                -oi \
+                -ot \
+                -f 5 \
+                "$file"
            mv $file 1-dati/1-ubx
   done
 
@@ -234,93 +241,6 @@ cd $PATH_DIR/1-dati/2-rinex
 done
 
 #########################################################################################
-# INSERIMENTO NEL FILE *.conf DELLE COORDINATE DELLA MASTER
-#########################################################################################
-MLAT=`cat $HOME/bin/rin2go/confs/stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $1}'`
-MLON=`cat $HOME/bin/rin2go/confs/stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $2}'`
-MHEI=`cat $HOME/bin/rin2go/confs/stations.pos | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $3}'`
-      if [ $SITE="acom" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="afal" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="canv" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="codr" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="fuse" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="joan" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="mdea" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="mpra" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="nove" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="pazo" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="pmnt" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="suse" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="trie" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="udi1" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="varm" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-      elif [ $SITE="zouf" ]; then
-            cat $PATH_CONF \
-                  | awk '{gsub(/ant2-pos1          =/,"ant2-pos1          ='$MLAT'"); print}' \
-                  | awk '{gsub(/ant2-pos2          =/,"ant2-pos2          ='$MLON'"); print}' \
-                  | awk '{gsub(/ant2-pos3          =/,"ant2-pos3          ='$MHEI'"); print}'
-        fi
-#########################################################################################
 # POST-PROCESSING SEQUENZIALE
 #########################################################################################
 clear
@@ -328,12 +248,22 @@ echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Post-Processing...${normale}"
 echo ""
+  # Variabili Master (Latitudine,Longitudine,Quota Ellissoidica)
+  MLAT=`cat $HOME/bin/rin2go/confs/stations.pos \
+      | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $1}'`
+  MLON=`cat $HOME/bin/rin2go/confs/stations.pos \
+      | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $2}'`
+  MHEI=`cat $HOME/bin/rin2go/confs/stations.pos \
+      | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $3}'`
   for file in `find -name *.obs`; do
            VAR0=$(basename "$file")
            VAR1="${VAR0%.*}"
            echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo l'elaborazione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
            PATH_FILE2=`dirname "$file"`
-           rnx2rtkp -k $PATH_CONF -o $file.pos $PATH_FILE2/*.obs $PATH_FILE2/*.21o $PATH_FILE2/*.21n
+                rnx2rtkp \
+                    -k $PATH_CONF \
+                    -l $MLAT $MLON $MHEI  \
+                    -o $file.pos $PATH_FILE2/*.obs $PATH_FILE2/*.21o $PATH_FILE2/*.21n
            echo "${grassetto}${txtverde}  ${normale}${grassetto}${txtsfoverde}Completato!${normale}"
            rm -fR $PATH_FILE2/*.stat
            rm -fR $PATH_FILE2/*.obs_events.pos
@@ -366,7 +296,8 @@ echo ""
 
   for file in ../../2-risultati/1-pos/*pos*; do
            pos2enu $file | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_full.csv
-           pos2enu $file | awk '/FIX/ {print}' | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_fix.csv
+           pos2enu $file | awk '/FIX/ {print}' \
+           | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_fix.csv
   done
 
 echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane dei punti rilevati:${normale}"
@@ -389,23 +320,25 @@ echo ""
   done
 
 # Creazione del file *kml (FIX)
-cat $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv | awk -F, BEGIN'{print "lat,lon,name"} {print $2","$3","$1}' \
->> $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv
-csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv \
->> $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
-ogr2ogr -f "KML" $PATH_DIR/2-risultati/2-csv/wgs84_fix.kml \
-$PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
+cat $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv \
+        | awk -F, BEGIN'{print "lat,lon,name"} {print $2","$3","$1}' \
+        >> $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv
+    csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv \
+        >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
+    ogr2ogr -f "KML" $PATH_DIR/2-risultati/2-csv/wgs84_fix.kml \
+           $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
 mv $PATH_DIR/2-risultati/2-csv/wgs84_fix.kml $PATH_DIR/2-risultati/3-kml
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
 
 # Creazione del file *kml (STD)
-cat $PATH_DIR/2-risultati/2-csv/wgs84_std.csv | awk -F, BEGIN'{print "lat,lon,name"} {print $2","$3","$1}' \
->> $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv
-csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv \
->> $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
-ogr2ogr -f "KML" $PATH_DIR/2-risultati/2-csv/wgs84_std.kml \
-$PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
+cat $PATH_DIR/2-risultati/2-csv/wgs84_std.csv \
+        | awk -F, BEGIN'{print "lat,lon,name"} {print $2","$3","$1}' \
+        >> $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv
+    csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv \
+        >> $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
+    ogr2ogr -f "KML" $PATH_DIR/2-risultati/2-csv/wgs84_std.kml \
+           $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
 mv $PATH_DIR/2-risultati/2-csv/wgs84_std.kml $PATH_DIR/2-risultati/3-kml
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
