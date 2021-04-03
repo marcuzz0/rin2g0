@@ -7,6 +7,7 @@ osservazioni derivate da registrazioni di file in formato proprietario Ublox.
 - elabora dati grezzi GNSS con osservazioni non più lunghe di un'ora
 - scarica in maniera completamente automatica dati grezzi dal sito FTP delle stazioni permanenti della 
 Rete FredNET (OGS) http://frednet.crs.inogs.it/ItalianSite/XFReDNetHome.htm
+- restituisce rapporti dettagliati delle coordinate a video, su file *.csv e *.kml
 
 Più nel dettaglio lo script esegue i seguenti passaggi in sequenza:
 - creazione delle cartelle di lavoro
