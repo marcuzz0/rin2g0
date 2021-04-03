@@ -1,6 +1,6 @@
 # rin2go
 ## Premessa
-rin2go è uno script shell scritto in bash che permette il post processing automatico di soli punti derivati da
+rin2go è uno script shell scritto in bash che permette il post processing GNSS automatico di soli punti derivati da
 osservazioni derivate da registrazioni di file in formato proprietario Ublox.
 
 ## Cosa fa...
