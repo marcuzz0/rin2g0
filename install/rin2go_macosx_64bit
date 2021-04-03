@@ -1,13 +1,13 @@
 #!/bin/bash
 #
 # versione 	1.0
-# data 		31/03/2021
+# data 		03/04/2021
 # autore	MSeverin
 #
 #########################################################################################
 # VARIABILI
 #########################################################################################
-ONLY_TITLE="rin2go_linux_x86_64bit"
+ONLY_TITLE="rin2go_macosx_64bit"
 
 #########################################################################################
 # VARIABILI DI FORMATTAZIONE
@@ -33,14 +33,75 @@ txtsfociano=$(tput setab 6)   # sfondo carattere ciano (azzurro)
 txtsfobianco=$(tput setab 7)  # sfondo carattere bianco
 
 #########################################################################################
-# AGGIORNAMENTO DEL SISTEMA
+# INSTALLAZIONE DI HOMEBREW,WGET,GIT,PROJ,GDAL,TCSH,COREUTILS,FINDUTILS,GAWK,GFORTRAN,DOCTOR,NODE,CSV2GEOJSON
 #########################################################################################
 clear
 echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
-echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}AGGIORNAMENTO DEL SISTEMA...${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI HOMEBREW...${normale}"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+clear
 echo ""
-sudo apt-get update && sudo apt-get upgrade
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI WGET...${normale}"
+brew install wget
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI GIT...${normale}"
+brew install git
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI PROJ...${normale}"
+brew install proj
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI GDAL...${normale}"
+brew install gdal
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI TCSH...${normale}"
+brew install tcsh
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI COREUTILS...${normale}"
+brew install coreutils
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI FINDUTILS...${normale}"
+brew install findutils
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI GAWK...${normale}"
+brew install gawk
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI GFORTRAN...${normale}"
+brew install gfortran
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI DOCTOR...${normale}"
+brew install doctor
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI NODE...${normale}"
+brew install node
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI CSV2GEOJSON...${normale}"
+sudo npm install -g csv2geojson
+
+
 
 #########################################################################################
 # SCARICAMENTO PACCHETTI GIT DI CSV2GEOJSON,RTKLIB,CRX2RNX
@@ -68,24 +129,6 @@ echo 'export PATH=$PATH:$HOME/bin/rin2go/other"' >>~/.bashrc
 echo 'export PATH=$PATH:$HOME/bin/rin2go/install"' >>~/.bashrc
 cd
 source .bashrc
-
-#########################################################################################
-# INSTALLAZIONE PACCHETTI TCSH,GIT,PROJ,GDAL,GAWK,GFORTRAN,NPM,CSV2GEOJSON
-#########################################################################################
-clear
-echo ""
-echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
-echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE PACCHETTI TCSH,GIT,PROJ,GDAL,GAWK,GFORTRAN,NPM,CSV2GEOJSON...${normale}"
-echo ""
-sudo apt-get install tcsh
-sudo apt-get install git
-sudo apt-get install proj-bin
-sudo apt-get install gdal-bin
-sudo apt-get install gawk
-sudo apt-get install gfortran
-sudo apt install npm
-sudo npm install -g csv2geojson
-sudo apt autoremove
 
 #########################################################################################
 # INSTALLAZIONE RTKLIB PACCHETTI CONVBIN,RNX2RTKP
