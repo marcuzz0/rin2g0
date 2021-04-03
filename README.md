@@ -66,6 +66,7 @@ $ ./rin2go/install/rin2go_linux_x86_64bit
 $ cd $HOME
 $ mkdir bin
 $ cd $HOME/bin
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 $ brew install git
 $ git clone https://github.com/marcuzz0/rin2go.git
 $ ./rin2go/install/rin2go_macosx_64bit

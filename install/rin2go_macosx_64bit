@@ -33,13 +33,8 @@ txtsfociano=$(tput setab 6)   # sfondo carattere ciano (azzurro)
 txtsfobianco=$(tput setab 7)  # sfondo carattere bianco
 
 #########################################################################################
-# INSTALLAZIONE DI HOMEBREW,WGET,GIT,PROJ,GDAL,TCSH,COREUTILS,FINDUTILS,GAWK,GFORTRAN,DOCTOR,NODE,CSV2GEOJSON
+# INSTALLAZIONE DI WGET,GIT,PROJ,GDAL,TCSH,COREUTILS,FINDUTILS,GAWK,GFORTRAN,DOCTOR,NODE,CSV2GEOJSON
 #########################################################################################
-clear
-echo ""
-echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
-echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI HOMEBREW...${normale}"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 clear
 echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
