@@ -7,7 +7,7 @@ osservazioni derivate da registrazioni di file in formato proprietario Ublox.
 - elabora dati grezzi GNSS con osservazioni non più lunghe di un'ora
 - scarica in maniera completamente automatica dati grezzi dal sito FTP delle stazioni permanenti della 
 Rete FredNET (OGS) http://frednet.crs.inogs.it/ItalianSite/XFReDNetHome.htm
-- restituisce rapporti dettagliati delle coordinate a video, su file *.csv e *.kml
+- restituisce rapporti finali delle coordinate
 
 Più nel dettaglio lo script esegue i seguenti passaggi in sequenza:
 - creazione delle cartelle di lavoro
@@ -15,7 +15,7 @@ Più nel dettaglio lo script esegue i seguenti passaggi in sequenza:
 - download dei files rinex (master) dalla Rete FredNET (OGS) e successiva conversione in file *.21o e *.21n
 - post-processing dei dei files rinex raccolti
 - media pesata (ponderata) dei risultati ottenuti e conversione in coordinate piane
-- rapporti finali in formato *.csv e *.kml
+- rapporti finali dettagliati delle coordinate a video, su file *.csv e *.kml
 
 
 ## Come si utilizza...
