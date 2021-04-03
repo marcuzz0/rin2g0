@@ -1,0 +1,344 @@
+#!/bin/bash
+#
+# versione 	1.0
+# data 		18/03/2021
+# autore	MSeverin
+#
+#########################################################################################
+# VARIABILI
+#########################################################################################
+ONLY_TITLE="rin2go"
+URL="frednet.crs.inogs.it/rinex_1s"
+PATH_CONF="$HOME/bin/rin2go/confs/kinematic.conf"
+PATH_DIR="$HOME/bin/rin2go/run"
+TYPE_d="d"
+TYPE_n="n"
+#TYPE_g="g"
+#TYPE_s="s"
+
+#########################################################################################
+# VARIABILI DI FORMATTAZIONE
+#########################################################################################
+sottolineato=$(tput smul)     # attiva il sottolineato
+nonsottolineato=$(tput rmul)  # disattiva il sottolineato
+grassetto=$(tput bold)        # attiva il grassetto
+inverso=$(tput rev)           # attiva la modalità inversa
+normale=$(tput sgr0)          # annulla tutti gli effetti e torna al default
+txtrosso=$(tput setaf 1)      # carattere rosso
+txtverde=$(tput setaf 2)      # carattere verde
+txtgiallo=$(tput setaf 3)     # carattere giallo
+txtblu=$(tput setaf 4)        # carattere blu
+txtporpora=$(tput setaf 5)    # carattere porpora
+txtciano=$(tput setaf 6)      # carattere ciano (azzurro)
+txtbianco=$(tput setaf 7)     # carattere bianco
+txtsforosso=$(tput setab 1)   # sfondo carattere rosso
+txtsfoverde=$(tput setab 2)   # sfondo carattere verde
+txtsfogiallo=$(tput setab 3)  # sfondo carattere giallo
+txtsfoblu=$(tput setab 4)     # sfondo carattere blu
+txtsfoporpora=$(tput setab 5) # sfondo carattere porpora
+txtsfociano=$(tput setab 6)   # sfondo carattere ciano (azzurro)
+txtsfobianco=$(tput setab 7)  # sfondo carattere bianco
+
+#########################################################################################
+# CREAZIONE DELLE CARTELLE E SOTTOCARTELLE DI LAVORO
+#########################################################################################
+alias date='gdate'
+alias find='gfind'
+
+cd $PATH_DIR
+  for file in `find -name *.ubx`; do mv $file $PATH_DIR; done
+  rm -R -- */
+  mkdir 1-dati
+  mkdir 2-risultati
+cd 1-dati
+  mkdir 1-ubx
+  mkdir 2-rinex
+cd ../2-risultati
+  mkdir 1-pos
+  mkdir 2-csv
+  mkdir 3-kml
+cd
+
+#########################################################################################
+# CONVERSIONE DEI FILE DA  *.UBX A *.OBS
+#########################################################################################
+clear
+cd $PATH_DIR
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Conversione dei file...${normale}"
+sleep 1
+  for file in *ubx*; do
+           VAR0=$(basename "$file")
+           VAR1="${VAR0%.*}"
+           echo ""
+           echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo la conversione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
+              convbin \
+                -r ubx \
+                -od \
+                -os \
+                -oi \
+                -ot \
+                -f 5 \
+                "$file"
+           mv $file 1-dati/1-ubx
+  done
+
+  for file in *obs; do mv $file 1-dati/2-rinex; done
+  for file in *nav* *sbs; do rm -fR $file *nav* *sbs; done
+  for file in 1-dati/2-rinex/*obs*; do
+           dir="${file%%.*}"
+           mkdir $dir
+           mv $file $dir
+  done
+echo ""
+echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Premi INVIO per procedere...${normale}"
+read
+
+#########################################################################################
+# LISTA DELLE STAZIONI PERMANENTI DELLA RETE FREDNET (OGS)
+#########################################################################################
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Sito:${normale}
+
+    1.  ${normale}${grassetto}acom ${grassetto}${txtverde}-> ${normale}Malborghetto (UD)
+    2.  ${normale}${grassetto}afal ${grassetto}${txtverde}-> ${normale}Cortina D'Ampezzo (BL)
+    3.  ${normale}${grassetto}canv ${grassetto}${txtverde}-> ${normale}Caneva (PN)
+    4.  ${normale}${grassetto}codr ${grassetto}${txtverde}-> ${normale}Codroipo (UD)
+    5.  ${normale}${grassetto}fuse ${grassetto}${txtverde}-> ${normale}Tolmezzo (UD)
+    6.  ${normale}${grassetto}joan ${grassetto}${txtverde}-> ${normale}Torreano di Cividale (UD)
+    7.  ${normale}${grassetto}mdea ${grassetto}${txtverde}-> ${normale}Medea (GO)
+    8.  ${normale}${grassetto}mpra ${grassetto}${txtverde}-> ${normale}Forgaria del Friuli (UD)
+    9.  ${normale}${grassetto}nove ${grassetto}${txtverde}-> ${normale}Noventa di Piave (VE)
+    10. ${normale}${grassetto}pazo ${grassetto}${txtverde}-> ${normale}Palazzolo dello Stella (UD)
+    11. ${normale}${grassetto}pmnt ${grassetto}${txtverde}-> ${normale}Sella Nevea (UD)
+    12. ${normale}${grassetto}suse ${grassetto}${txtverde}-> ${normale}Collalto di Susegana (TV)
+    13. ${normale}${grassetto}trie ${grassetto}${txtverde}-> ${normale}Sgonico (TS)
+    14. ${normale}${grassetto}udi1 ${grassetto}${txtverde}-> ${normale}Cussignacco (UD)
+    15. ${normale}${grassetto}varm ${grassetto}${txtverde}-> ${normale}Forni di Sopra (UD)
+    16. ${normale}${grassetto}zouf ${grassetto}${txtverde}-> ${normale}Cercivento (UD)
+"
+read -p "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Fai una scelta (1 - 16):${normale} " choice
+  case $choice in
+        1)      SITE_COMPLETE="acom - Malborghetto (UD)"
+                ;;
+        2)      SITE_COMPLETE="afal - Cortina D'Ampezzo (BL)"
+                ;;
+        3)      SITE_COMPLETE="canv - Caneva (PN)"
+                ;;
+        4)      SITE_COMPLETE="codr - Codroipo (UD)"
+                ;;
+        5)      SITE_COMPLETE="fuse - Tolmezzo (UD)"
+                ;;
+        6)      SITE_COMPLETE="joan - Torreano di Cividale (UD)"
+                ;;
+        7)      SITE_COMPLETE="mdea - Medea (GO)"
+                ;;
+        8)      SITE_COMPLETE="mpra - Forgaria del Friuli (UD)"
+                ;;
+        9)      SITE_COMPLETE="nove - Noventa di Piave (VE)"
+                ;;
+        10)     SITE_COMPLETE="pazo - Palazzolo dello Stella (UD)"
+                ;;
+        11)     SITE_COMPLETE="pmnt - Sella Nevea (UD)"
+                ;;
+        12)     SITE_COMPLETE="suse - Collalto di Susegana (TV)"
+                ;;
+        13)     SITE_COMPLETE="trie - Sgonico (TS)"
+                ;;
+        14)     SITE_COMPLETE="udi1 - Cussignacco (UD)"
+                ;;
+        15)     SITE_COMPLETE="varm - Forni di Sopra (UD)"
+                ;;
+        16)     SITE_COMPLETE="zouf - Cercivento (UD)"
+                ;;
+        *)      echo "${grassetto}${txtrosso}->${normale}${grassetto}${txtbianco}Scelta errata!Riprova...${normale} "
+                sleep 2
+                rin2go
+                ;;
+esac
+
+#########################################################################################
+# DOWNLOAD DEI FILE RINEX DALLA RETE FRENET (OGS)
+#########################################################################################
+SITE=`echo $SITE_COMPLETE | awk '{print $1}'`
+cd $PATH_DIR/1-dati/2-rinex
+  for file in `find -name *.obs`; do
+           YEAR=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $1}'`
+           MONTH=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $2}'`
+           DAY=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $3}'`
+           HOUR=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $4+1}'`
+           PATH_FILE1=`dirname "$file"`
+           DATE="$YEAR-$MONTH-$DAY"
+           DOY=`date -d "$DATE" +%j`
+           y=`date -d "$DATE" +%y`
+                if [ $HOUR = "01" ]; then
+                      VAR="a"
+              elif [ $HOUR = "02" ]; then
+                      VAR="b"
+              elif [ $HOUR = "03" ]; then
+                      VAR="c"
+              elif [ $HOUR = "04" ]; then
+                      VAR="d"
+              elif [ $HOUR = "05" ]; then
+                      VAR="e"
+              elif [ $HOUR = "06" ]; then
+                      VAR="f"
+              elif [ $HOUR = "07" ]; then
+                      VAR="g"
+              elif [ $HOUR = "08" ]; then
+                      VAR="h"
+              elif [ $HOUR = "09" ]; then
+                      VAR="i"
+              elif [ $HOUR = "10" ]; then
+                      VAR="j"
+              elif [ $HOUR = "11" ]; then
+                      VAR="k"
+              elif [ $HOUR = "12" ]; then
+                      VAR="l"
+              elif [ $HOUR = "13" ]; then
+                      VAR="m"
+              elif [ $HOUR = "14" ]; then
+                      VAR="n"
+              elif [ $HOUR = "15" ]; then
+                      VAR="o"
+              elif [ $HOUR = "16" ]; then
+                      VAR="p"
+              elif [ $HOUR = "17" ]; then
+                      VAR="q"
+              elif [ $HOUR = "18" ]; then
+                      VAR="r"
+              elif [ $HOUR = "19" ]; then
+                      VAR="s"
+              elif [ $HOUR = "20" ]; then
+                      VAR="t"
+              elif [ $HOUR = "21" ]; then
+                      VAR="u"
+              elif [ $HOUR = "22" ]; then
+                      VAR="v"
+              elif [ $HOUR = "23" ]; then
+                      VAR="w"
+              elif [ $HOUR = "24" ]; then
+                      VAR="x"
+              fi
+      clear
+      echo ""
+      echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+      echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download dei file rinex...${normale}"
+      echo ""
+      echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download del file ${grassetto}${txtsfoblu}$SITE$DOY$VAR.$y$TYPE_d.Z...${normale}"
+      wget ftp://$URL/$YEAR/$DOY/$HOUR/$SITE$DOY$VAR.$y$TYPE_d.Z
+      echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Download del file ${grassetto}${txtsfoblu}$SITE$DOY$VAR.$y$TYPE_d.Z...${normale}"
+      wget ftp://$URL/$YEAR/$DOY/$HOUR/$SITE$DOY$VAR.$y$TYPE_n.Z
+      mv $SITE$DOY$VAR.$y$TYPE_d.Z $PATH_FILE1
+      mv $SITE$DOY$VAR.$y$TYPE_n.Z $PATH_FILE1
+      gunzip $PATH_FILE1/*.Z
+      CRX2RNX $PATH_FILE1/$SITE$DOY$VAR.$y$TYPE_d
+      rm -fR $PATH_FILE1/$SITE$DOY$VAR.$y$TYPE_d
+      echo -e "Download file rinex\nServizio: Rete FREDNET (OGS)\nSito di: $SITE_COMPLETE\nData: $DATE\nIntervallo orario: $(($HOUR-1))-$HOUR (Ora UTC)" >> $PATH_FILE1/$SITE.log
+done
+
+#########################################################################################
+# POST-PROCESSING SEQUENZIALE
+#########################################################################################
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Post-Processing...${normale}"
+echo ""
+  # Variabili Master (Latitudine,Longitudine,Quota Ellissoidica)
+  MLAT=`cat $HOME/bin/rin2go/confs/stations.pos \
+      | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $1}'`
+  MLON=`cat $HOME/bin/rin2go/confs/stations.pos \
+      | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $2}'`
+  MHEI=`cat $HOME/bin/rin2go/confs/stations.pos \
+      | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $3}'`
+  for file in `find -name *.obs`; do
+           VAR0=$(basename "$file")
+           VAR1="${VAR0%.*}"
+           echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo l'elaborazione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
+           PATH_FILE2=`dirname "$file"`
+                rnx2rtkp \
+                    -k $PATH_CONF \
+                    -l $MLAT $MLON $MHEI  \
+                    -o $file.pos $PATH_FILE2/*.obs $PATH_FILE2/*.21o $PATH_FILE2/*.21n
+           echo "${grassetto}${txtverde}  ${normale}${grassetto}${txtsfoverde}Completato!${normale}"
+           rm -fR $PATH_FILE2/*.stat
+           rm -fR $PATH_FILE2/*.obs_events.pos
+           mv $PATH_FILE2/*.pos `echo $PATH_FILE2/*.pos | sed s/obs.pos/pos/g`
+           mv $PATH_FILE2/*.pos ../../2-risultati/1-pos/
+  done
+sleep 2
+
+#########################################################################################
+# REPORTISTICA FILE *.POS, *.CSV, *.KML
+#########################################################################################
+clear
+echo ""
+echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
+echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Rapportini finali...${normale}"
+echo ""
+  for file in `find -name *.obs`; do
+        VAR0=$(basename "$file")
+        VAR1="${VAR0%.*}"
+        XYZ=`cat "$file" | awk '/APPROX POSITION XYZ / {print}' | awk '{FS="\t"}; {print $1,$2,$3}'`
+        #Coordinate geografiche dei punti rilevati in STD derivate dal file rinex *.obs
+        WGS84_STD=`xyz2wgs84 $XYZ`
+        WGS84_STD2=`echo $WGS84_STD | awk '{FS="\t"}; {print $1","$2","$3}'`
+        echo $VAR1.std,$WGS84_STD2 >> $PATH_DIR/2-risultati/2-csv/wgs84_std.csv
+        #Coordinate piane dei punti rilevati in STD derivate dal file rinex *.obs
+        ENU_STD=`xyz2enu $XYZ`
+        ENU_STD2=`echo $ENU_STD | awk '{FS="\t"}; {print $1","$2","$3",""STD"}'`
+        echo $VAR1.std,$ENU_STD2 >> $PATH_DIR/2-risultati/2-csv/enu_std.csv
+  done
+
+  for file in ../../2-risultati/1-pos/*pos*; do
+           pos2enu $file | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_full.csv
+           pos2enu $file | awk '/FIX/ {print}' \
+           | awk '{print $1","$2","$3","$4","$5}' >> ../../2-risultati/2-csv/enu_fix.csv
+  done
+
+echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane dei punti rilevati:${normale}"
+cat ../../2-risultati/2-csv/enu_full.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
+echo ""
+echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane dei punti rilevati:${normale} ${grassetto}${txtsfoverde}(FIX)${normale}"
+cat ../../2-risultati/2-csv/enu_fix.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
+echo ""
+echo "${grassetto}${txtverde}->${sottolineato}${grassetto}${txtbianco}Coordinate piane dei punti rilevati:${normale} ${grassetto}${txtsforosso}(STD)${normale}"
+cat ../../2-risultati/2-csv/enu_std.csv | sed 's/'$'\,/\t/g' | sed 's/^/  /'
+echo ""
+
+  for file in $PATH_DIR/2-risultati/1-pos/*pos*; do
+           ENU=`pos2enu $file | awk '/FIX/ {print}' | awk '{print $1","$2","$3","$4","$5}'`
+           echo $ENU \
+           | awk -F, '{printf ("%d ",$1); system ("echo "$2" "$3" "$4" \
+           | cs2cs -f '%.8f' +init=epsg:32633 +to +init=epsg:4326")}' \
+           | awk '{printf ("%5d\t",$1); printf("%10.8f\t%10.8f\t%8.3f\n", $3, $2, $4)}' \
+           | awk '{print $1","$2","$3","$4}' >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv
+  done
+
+# Creazione del file *kml (FIX)
+cat $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv \
+        | awk -F, BEGIN'{print "lat,lon,name"} {print $2","$3","$1}' \
+        >> $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv
+    csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv \
+        >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
+    ogr2ogr -f "KML" $PATH_DIR/2-risultati/2-csv/wgs84_fix.kml \
+           $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
+mv $PATH_DIR/2-risultati/2-csv/wgs84_fix.kml $PATH_DIR/2-risultati/3-kml
+rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_fix_GE.csv
+rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_fix.geojson
+
+# Creazione del file *kml (STD)
+cat $PATH_DIR/2-risultati/2-csv/wgs84_std.csv \
+        | awk -F, BEGIN'{print "lat,lon,name"} {print $2","$3","$1}' \
+        >> $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv
+    csv2geojson  $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv \
+        >> $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
+    ogr2ogr -f "KML" $PATH_DIR/2-risultati/2-csv/wgs84_std.kml \
+           $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
+mv $PATH_DIR/2-risultati/2-csv/wgs84_std.kml $PATH_DIR/2-risultati/3-kml
+rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv
+rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
