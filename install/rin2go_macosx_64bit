@@ -48,11 +48,6 @@ brew install wget
 clear
 echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
-echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI GIT...${normale}"
-brew install git
-clear
-echo ""
-echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo -e "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}INSTALLAZIONE DI PROJ...${normale}"
 brew install proj
 clear

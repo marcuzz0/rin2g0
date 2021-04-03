@@ -56,6 +56,7 @@ Di seguito vengono riportati i passaggi per l'installazione delle dipendenze nec
 $ cd $HOME
 $ mkdir bin
 $ cd $HOME/bin
+$ sudo apt-get install git
 $ git clone https://github.com/marcuzz0/rin2go.git
 $ ./rin2go/install/rin2go_linux_x86_64bit
 ```
@@ -65,6 +66,7 @@ $ ./rin2go/install/rin2go_linux_x86_64bit
 $ cd $HOME
 $ mkdir bin
 $ cd $HOME/bin
+$ brew install git
 $ git clone https://github.com/marcuzz0/rin2go.git
 $ ./rin2go/install/rin2go_macosx_64bit
 ```
