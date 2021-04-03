@@ -1,6 +1,11 @@
 # rin2go
 ## Premessa
 rin2go è uno script shell scritto in bash che permette il post processing automatico di files rinex UBX.
+
+## Da sapere che al momento lo script...
+- elabora dati grezzi GNSS con osservazioni non più lunghe di un'ora
+- scarica in maniera completamente automatica dati grezzi dal sito FTP delle stazioni permanenti della Rete FredNET (OGS)
+
 Più nel dettaglio lo script esegue i seguenti passaggi in sequenza:
 
 - creazione delle cartelle di lavoro
@@ -60,12 +65,13 @@ $ chmod a+x rin2go
 
 ## Come si utilizza
 
-- copiare i files rinex proprietari in formato *.ubx nella cartella $HOME/bin/run
+- copiare i files rinex proprietari in formato *.ubx nella cartella $HOME/bin/rin2go/run
 - far partire lo script con il comando:
 ```
 $ rin2go
 ```
-- alla richiesta del sito scegliere la stazione permanente dalla quale volete scaricare i files rinex della master
+- alla richiesta del sito scegliere la stazione permanente dalla quale volete scaricare i files rinex della master ed
+in automatico verranno prese le coordinate della master scelta direttamente dal file stations.pos
 - al termine dell'elaborazione verrano visualizzati a video i rapporti con:
 	- coordinate piane dei punti 				
 	- coordinate piane dei punti (FIX) 			
