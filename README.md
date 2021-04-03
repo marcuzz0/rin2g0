@@ -4,7 +4,8 @@ rin2go è uno script shell scritto in bash che permette il post processing autom
 
 ## Cosa fa...
 - elabora dati grezzi GNSS con osservazioni non più lunghe di un'ora
-- scarica in maniera completamente automatica dati grezzi dal sito FTP delle stazioni permanenti della Rete FredNET (OGS)
+- scarica in maniera completamente automatica dati grezzi dal sito FTP delle stazioni permanenti della 
+Rete FredNET (OGS) http://frednet.crs.inogs.it/ItalianSite/XFReDNetHome.htm
 
 Più nel dettaglio lo script esegue i seguenti passaggi in sequenza:
 - creazione delle cartelle di lavoro
