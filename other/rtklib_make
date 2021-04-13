@@ -16,7 +16,7 @@ foreach PROG_VER ($PROG_VERS)
         set SRC_PATH    = ${HOME}/bin/${PROG_VER}/app/consapp
         foreach PROG ($PROGS)
                 cd ${SRC_PATH}/${PROG}/gcc
-                make clean
+                make clean all
                 make
                 sudo make install
         end

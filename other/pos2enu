@@ -16,37 +16,37 @@ set XYZ_FIX = `cat $FILE | grep -v % | awk '{if ($6==1) print $0}' \
 		| awk '{X += $3/$8^2; sumErrX += 1/$8^2} \
 					 {Y += $4/$9^2; sumErrY += 1/$9^2} \
 					 {Z += $5/$10^2; sumErrZ += 1/$10^2} \
-			END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+			END {if (NR != 0) printf("%17.13f%17.13f%9.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
 
 set XYZ_STD = `cat $FILE | grep -v % | awk '{if ($6==5) print $0}' \
 		| awk '{X+=sprintf("%f",$3/$8^2); sumErrX += 1/$8^2} \
 				 	 {Y+=sprintf("%f",$4/$9^2); sumErrY += 1/$9^2} \
 				 	 {Z+=sprintf("%f",$5/$10^2); sumErrZ += 1/$10^2} \
-			END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+			END {if (NR != 0) printf("%17.13f%17.13f%9.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
 
 set XYZ_PPP = `cat $FILE | grep -v % | awk '{if ($6==6) print $0}' \
 		| awk '{X+=sprintf("%f",$3/$8^2); sumErrX += 1/$8^2} \
 				   {Y+=sprintf("%f",$4/$9^2); sumErrY += 1/$9^2} \
 				   {Z+=sprintf("%f",$5/$10^2); sumErrZ += 1/$10^2} \
-		  END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+		  END {if (NR != 0) printf("%17.13f%17.13f%9.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
 
 set XYZ_FLT = `cat $FILE | grep -v % | awk '{if ($6==2) print $0}' \
 		| awk '{X+=sprintf("%f",$3/$8^2); sumErrX += 1/$8^2} \
 				   {Y+=sprintf("%f",$4/$9^2); sumErrY += 1/$9^2} \
 				   {Z+=sprintf("%f",$5/$10^2); sumErrZ += 1/$10^2} \
-			END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+			END {if (NR != 0) printf("%17.13f%17.13f%9.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
 
 set XYZ_SBS = `cat $FILE | grep -v % | awk '{if ($6==3) print $0}' \
 		| awk '{X+=sprintf("%f",$3/$8^2); sumErrX += 1/$8^2} \
 				   {Y+=sprintf("%f",$4/$9^2); sumErrY += 1/$9^2} \
 			  	 {Z+=sprintf("%f",$5/$10^2); sumErrZ += 1/$10^2} \
-	 	  END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+	 	  END {if (NR != 0) printf("%17.13f%17.13f%9.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
 
 set XYZ_DGPS = `cat $FILE | grep -v % | awk '{if ($6==4) print $0}' \
 		| awk '{X+=sprintf("%f",$3/$8^2); sumErrX += 1/$8^2} \
 				 	 {Y+=sprintf("%f",$4/$9^2); sumErrY += 1/$9^2} \
 				   {Z+=sprintf("%f",$5/$10^2); sumErrZ += 1/$10^2} \
-			END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+			END {if (NR != 0) printf("%17.13f%17.13f%9.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
 #########################################################################################
 
 if ("$XYZ_FIX" != "") then
@@ -93,7 +93,6 @@ if ("$XYZ_SBS" != "") then
 	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n", $1, $2, $3)}'`
 else
 endif
-
 if ("$XYZ_DGPS" != "") then
 	set STATUS = "DGPS"
 	set UTM_DGPS = `echo $XYZ_DGPS[2] $XYZ_DGPS[1] $XYZ_DGPS[3]| cs2cs -f "%.3f" \
@@ -137,3 +136,4 @@ set BASE_NAME = `basename $FILE`
 		echo "$UTM_DGPS" | awk '{printf("%s\t%10.3f\t%12.3f\t%12.3f\t%s\n","'"$BASE_NAME"'",$1,$2,$3,"'"$STATUS"'")}'
 	else
 	endif
+end

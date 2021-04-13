@@ -174,55 +174,31 @@ cd $PATH_DIR/1-dati/2-rinex
            DATE="$YEAR-$MONTH-$DAY"
            DOY=`date -d "$DATE" +%j`
            y=`date -d "$DATE" +%y`
-                if [ $HOUR = "01" ]; then
-                      VAR="a"
-              elif [ $HOUR = "02" ]; then
-                      VAR="b"
-              elif [ $HOUR = "03" ]; then
-                      VAR="c"
-              elif [ $HOUR = "04" ]; then
-                      VAR="d"
-              elif [ $HOUR = "05" ]; then
-                      VAR="e"
-              elif [ $HOUR = "06" ]; then
-                      VAR="f"
-              elif [ $HOUR = "07" ]; then
-                      VAR="g"
-              elif [ $HOUR = "08" ]; then
-                      VAR="h"
-              elif [ $HOUR = "09" ]; then
-                      VAR="i"
-              elif [ $HOUR = "10" ]; then
-                      VAR="j"
-              elif [ $HOUR = "11" ]; then
-                      VAR="k"
-              elif [ $HOUR = "12" ]; then
-                      VAR="l"
-              elif [ $HOUR = "13" ]; then
-                      VAR="m"
-              elif [ $HOUR = "14" ]; then
-                      VAR="n"
-              elif [ $HOUR = "15" ]; then
-                      VAR="o"
-              elif [ $HOUR = "16" ]; then
-                      VAR="p"
-              elif [ $HOUR = "17" ]; then
-                      VAR="q"
-              elif [ $HOUR = "18" ]; then
-                      VAR="r"
-              elif [ $HOUR = "19" ]; then
-                      VAR="s"
-              elif [ $HOUR = "20" ]; then
-                      VAR="t"
-              elif [ $HOUR = "21" ]; then
-                      VAR="u"
-              elif [ $HOUR = "22" ]; then
-                      VAR="v"
-              elif [ $HOUR = "23" ]; then
-                      VAR="w"
-              elif [ $HOUR = "24" ]; then
-                      VAR="x"
-              fi
+           if [ $HOUR = "1" ]; then VAR="a" HOUR="01"
+         elif [ $HOUR = "2" ]; then VAR="b" HOUR="02"
+         elif [ $HOUR = "3" ]; then VAR="c" HOUR="03"
+         elif [ $HOUR = "4" ]; then VAR="d" HOUR="04"
+         elif [ $HOUR = "5" ]; then VAR="e" HOUR="05"
+         elif [ $HOUR = "6" ]; then VAR="f" HOUR="06"
+         elif [ $HOUR = "7" ]; then VAR="g" HOUR="07"
+         elif [ $HOUR = "8" ]; then VAR="h" HOUR="08"
+         elif [ $HOUR = "9" ]; then VAR="i" HOUR="09"
+         elif [ $HOUR = "10" ]; then VAR="j"
+         elif [ $HOUR = "11" ]; then VAR="k"
+         elif [ $HOUR = "12" ]; then VAR="l"
+         elif [ $HOUR = "13" ]; then VAR="m"
+         elif [ $HOUR = "14" ]; then VAR="n"
+         elif [ $HOUR = "15" ]; then VAR="o"
+         elif [ $HOUR = "16" ]; then VAR="p"
+         elif [ $HOUR = "17" ]; then VAR="q"
+         elif [ $HOUR = "18" ]; then VAR="r"
+         elif [ $HOUR = "19" ]; then VAR="s"
+         elif [ $HOUR = "20" ]; then VAR="t"
+         elif [ $HOUR = "21" ]; then VAR="u"
+         elif [ $HOUR = "22" ]; then VAR="v"
+         elif [ $HOUR = "23" ]; then VAR="w"
+         elif [ $HOUR = "24" ]; then VAR="x"
+         fi
       clear
       echo ""
       echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
@@ -269,8 +245,7 @@ echo ""
            rm -fR $PATH_FILE2/*.obs_events.pos
            mv $PATH_FILE2/*.pos `echo $PATH_FILE2/*.pos | sed s/obs.pos/pos/g`
            mv $PATH_FILE2/*.pos ../../2-risultati/1-pos/
-  done
-sleep 2
+done
 
 #########################################################################################
 # REPORTISTICA FILE *.POS, *.CSV, *.KML
@@ -315,7 +290,7 @@ echo ""
            echo $ENU \
            | awk -F, '{printf ("%d ",$1); system ("echo "$2" "$3" "$4" \
            | cs2cs -f '%.8f' +init=epsg:32633 +to +init=epsg:4326")}' \
-           | awk '{printf ("%5d\t",$1); printf("%10.8f\t%10.8f\t%8.3f\n", $3, $2, $4)}' \
+           | awk '{printf ("%5d\t",$1); printf("%10.8f\t%10.8f\t%9.3f\n", $3, $2, $4)}' \
            | awk '{print $1","$2","$3","$4}' >> $PATH_DIR/2-risultati/2-csv/wgs84_fix.csv
   done
 
