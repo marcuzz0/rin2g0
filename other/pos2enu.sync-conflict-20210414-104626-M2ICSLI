@@ -1,0 +1,139 @@
+#!/bin/tcsh
+#
+# versione 	1.0
+# data 		15/02/2021
+# autore	MSeverin
+# co-autore	DZuliani
+#
+#########################################################################################
+# VARIABILI
+#########################################################################################
+set EPSG = 32633
+setenv LC_NUMERIC  C
+foreach FILE ($*)
+
+set XYZ_FIX = `cat $FILE | grep -v % | awk '{if ($6==1) print $0}' \
+		| awk '{X += $3/$8^2; sumErrX += 1/$8^2} \
+					 {Y += $4/$9^2; sumErrY += 1/$9^2} \
+					 {Z += $5/$10^2; sumErrZ += 1/$10^2} \
+			END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+
+set XYZ_STD = `cat $FILE | grep -v % | awk '{if ($6==5) print $0}' \
+		| awk '{X+=sprintf("%f",$3/$8^2); sumErrX += 1/$8^2} \
+				 	 {Y+=sprintf("%f",$4/$9^2); sumErrY += 1/$9^2} \
+				 	 {Z+=sprintf("%f",$5/$10^2); sumErrZ += 1/$10^2} \
+			END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+
+set XYZ_PPP = `cat $FILE | grep -v % | awk '{if ($6==6) print $0}' \
+		| awk '{X+=sprintf("%f",$3/$8^2); sumErrX += 1/$8^2} \
+				   {Y+=sprintf("%f",$4/$9^2); sumErrY += 1/$9^2} \
+				   {Z+=sprintf("%f",$5/$10^2); sumErrZ += 1/$10^2} \
+		  END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+
+set XYZ_FLT = `cat $FILE | grep -v % | awk '{if ($6==2) print $0}' \
+		| awk '{X+=sprintf("%f",$3/$8^2); sumErrX += 1/$8^2} \
+				   {Y+=sprintf("%f",$4/$9^2); sumErrY += 1/$9^2} \
+				   {Z+=sprintf("%f",$5/$10^2); sumErrZ += 1/$10^2} \
+			END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+
+set XYZ_SBS = `cat $FILE | grep -v % | awk '{if ($6==3) print $0}' \
+		| awk '{X+=sprintf("%f",$3/$8^2); sumErrX += 1/$8^2} \
+				   {Y+=sprintf("%f",$4/$9^2); sumErrY += 1/$9^2} \
+			  	 {Z+=sprintf("%f",$5/$10^2); sumErrZ += 1/$10^2} \
+	 	  END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+
+set XYZ_DGPS = `cat $FILE | grep -v % | awk '{if ($6==4) print $0}' \
+		| awk '{X+=sprintf("%f",$3/$8^2); sumErrX += 1/$8^2} \
+				 	 {Y+=sprintf("%f",$4/$9^2); sumErrY += 1/$9^2} \
+				   {Z+=sprintf("%f",$5/$10^2); sumErrZ += 1/$10^2} \
+			END {if (NR != 0) printf("%17.13f%17.13f%8.3f\n",X/sumErrX,Y/sumErrY,Z/sumErrZ)}'`
+#########################################################################################
+
+if ("$XYZ_FIX" != "") then
+	set STATUS = "FIX"
+	set UTM_FIX = `echo $XYZ_FIX[2] $XYZ_FIX[1] $XYZ_FIX[3]| cs2cs -f "%.3f" \
+	+init=epsg:4326 +to +init=epsg:$EPSG \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n",$1,$2,$3)}' \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n", $1, $2, $3)}'`
+else
+endif
+
+if ("$XYZ_STD" != "") then
+	set STATUS = "STD"
+	set UTM_STD = `echo $XYZ_STD[2] $XYZ_STD[1] $XYZ_STD[3]| cs2cs -f "%.3f" \
+	+init=epsg:4326 +to +init=epsg:$EPSG \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n",$1,$2,$3)}' \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n", $1, $2, $3)}'`
+else
+endif
+
+if ("$XYZ_PPP" != "") then
+	set STATUS = "PPP"
+	set UTM_PPP = `echo $XYZ_PPP[2] $XYZ_PPP[1] $XYZ_PPP[3]| cs2cs -f "%.3f" \
+	+init=epsg:4326 +to +init=epsg:$EPSG \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n",$1,$2,$3)}' \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n", $1, $2, $3)}'`
+else
+endif
+
+if ("$XYZ_FLT" != "") then
+	set STATUS = "FLT"
+	set UTM_FLT = `echo $XYZ_FLT[2] $XYZ_FLT[1] $XYZ_FLT[3]| cs2cs -f "%.3f" \
+	+init=epsg:4326 +to +init=epsg:$EPSG \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n",$1,$2,$3)}' \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n", $1, $2, $3)}'`
+else
+endif
+
+if ("$XYZ_SBS" != "") then
+	set STATUS = "SBS"
+	set UTM_SBS = `echo $XYZ_SBS[2] $XYZ_SBS[1] $XYZ_SBS[3]| cs2cs -f "%.3f" \
+	+init=epsg:4326 +to +init=epsg:$EPSG \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n",$1,$2,$3)}' \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n", $1, $2, $3)}'`
+else
+endif
+
+if ("$XYZ_DGPS" != "") then
+	set STATUS = "DGPS"
+	set UTM_DGPS = `echo $XYZ_DGPS[2] $XYZ_DGPS[1] $XYZ_DGPS[3]| cs2cs -f "%.3f" \
+	+init=epsg:4326 +to +init=epsg:$EPSG \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n",$1,$2,$3)}' \
+	| gawk '{printf("%10.3f\t%12.3f\t%12.3f\n", $1, $2, $3)}'`
+else
+endif
+
+#########################################################################################
+set BASE_NAME = `basename $FILE`
+#########################################################################################
+
+	if ("$XYZ_FIX" != "") then
+		set STATUS = "FIX"
+		echo "$UTM_FIX" | awk '{printf("%s\t%10.3f\t%12.3f\t%12.3f\t%s\n","'"$BASE_NAME"'",$1,$2,$3,"'"$STATUS"'")}'
+	else
+	endif
+	if ("$XYZ_PPP" != "") then
+    set STATUS = "PPP"
+		echo "$UTM_PPP" | awk '{printf("%s\t%10.3f\t%12.3f\t%12.3f\t%s\n","'"$BASE_NAME"'",$1,$2,$3,"'"$STATUS"'")}'
+	else
+	endif
+	if ("$XYZ_STD" != "") then
+		set STATUS = "STD"
+		echo "$UTM_STD" | awk '{printf("%s\t%10.3f\t%12.3f\t%12.3f\t%s\n","'"$BASE_NAME"'",$1,$2,$3,"'"$STATUS"'")}'
+	else
+	endif
+	if ("$XYZ_FLT" != "") then
+		set STATUS = "FLT"
+    echo "$UTM_FLT" | awk '{printf("%s\t%10.3f\t%12.3f\t%12.3f\t%s\n","'"$BASE_NAME"'",$1,$2,$3,"'"$STATUS"'")}'
+	else
+	endif
+	if ("$XYZ_SBS" != "") then
+		set STATUS = "SBS"
+		echo "$UTM_SBS" | awk '{printf("%s\t%10.3f\t%12.3f\t%12.3f\t%s\n","'"$BASE_NAME"'",$1,$2,$3,"'"$STATUS"'")}'
+	else
+	endif
+	if ("$XYZ_DGPS" != "") then
+		set STATUS = "DGPS"
+		echo "$UTM_DGPS" | awk '{printf("%s\t%10.3f\t%12.3f\t%12.3f\t%s\n","'"$BASE_NAME"'",$1,$2,$3,"'"$STATUS"'")}'
+	else
+	endif
