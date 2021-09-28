@@ -51,11 +51,11 @@ txtsfobianco=$(tput setab 7)  # sfondo carattere bianco
 #########################################################################################
 # CREAZIONE DELLE CARTELLE E SOTTOCARTELLE DI LAVORO
 #########################################################################################
-#alias date='gdate'
-#alias find='gfind'
+#alias date='date'
+#alias find='find'
 
 cd $PATH_DIR
-  for file in `gfind -name *.ubx`; do mv $file $PATH_DIR; done
+  for file in `find -name *.ubx`; do mv $file $PATH_DIR; done
   rm -R -- */
   mkdir 1-dati
   mkdir 2-risultati
@@ -164,15 +164,15 @@ esac
 #########################################################################################
 SITE=`echo $SITE_COMPLETE | awk '{print $1}'`
 cd $PATH_DIR/1-dati/2-rinex
-  for file in `gfind -name *.obs`; do
+  for file in `find -name *.obs`; do
            YEAR=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $1}'`
            MONTH=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $2}'`
            DAY=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $3}'`
            HOUR=`cat "$file" | awk '/TIME OF FIRST OBS/ {print}' | awk '{OFS="\t"} {print $4+1}'`
            PATH_FILE1=`dirname "$file"`
            date="$YEAR-$MONTH-$DAY"
-           DOY=`gdate -d "$date" +%j`
-           y=`gdate -d "$date" +%y`
+           DOY=`date -d "$date" +%j`
+           y=`date -d "$date" +%y`
            if [ $HOUR = "1" ]; then VAR="a" HOUR="01"
          elif [ $HOUR = "2" ]; then VAR="b" HOUR="02"
          elif [ $HOUR = "3" ]; then VAR="c" HOUR="03"
@@ -230,7 +230,7 @@ echo ""
       | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $2}'`
   MHEI=`cat $HOME/bin/rin2g0/confs/stations.pos \
       | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $3}'`
-  for file in `gfind -name *.obs`; do
+  for file in `find -name *.obs`; do
            VAR0=$(basename "$file")
            VAR1="${VAR0%.*}"
            echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Eseguo l'elaborazione per il punto ${grassetto}${txtsfoblu}$VAR1${normale}"
@@ -254,7 +254,7 @@ echo ""
 echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Rapportini finali...${normale}"
 echo ""
-  for file in `gfind -name *.obs`; do
+  for file in `find -name *.obs`; do
         VAR0=$(basename "$file")
         VAR1="${VAR0%.*}"
         XYZ=`cat "$file" | awk '/APPROX POSITION XYZ / {print}' | awk '{FS="\t"}; {print $1,$2,$3}'`
@@ -337,6 +337,9 @@ fi
 mv $PATH_DIR/2-risultati/2-csv/wgs84_std.kml $PATH_DIR/2-risultati/3-kml
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_std_GE.csv
 rm -fR $PATH_DIR/2-risultati/2-csv/wgs84_std.geojson
+
+
+exit
 
 #########################################################################################
 # CONNESSIONE A PSQL E SALVATAGGIO DEI FILE *.KML
