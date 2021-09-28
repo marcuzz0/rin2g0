@@ -8,8 +8,8 @@
 # VARIABILI
 #########################################################################################
 # Variabili generali
-ONLY_TITLE="rin2go"
-PATH_PROG="$HOME/bin/rin2go"
+ONLY_TITLE="rin2g0"
+PATH_PROG="$HOME/bin/rin2g0"
 PATH_DIR="$PATH_PROG/run"
 PATH_CONF="$PATH_PROG/confs/static.conf"
 STATIONS="$PATH_PROG/confs/stations.pos"
@@ -20,12 +20,12 @@ TYPE_d="d"
 TYPE_n="n"
 # Variabili di connessione
 URL="frednet.crs.inogs.it/rinex_1s"
-HOST="167.86.112.113"
+HOST=""
 PORT="5432"
-USER="admin"
+USER=""
 DATABASE="survey"
 SCHEMA="pp"
-PASSWORD="Bar0l077"
+PASSWORD=""
 PATH_DIR_KML="$PATH_PROG/run/2-risultati/3-kml"
 # Variabili di formattazione
 sottolineato=$(tput smul)     # attiva il sottolineato
@@ -155,7 +155,7 @@ read -p "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Fai una scel
         16)     SITE_COMPLETE="zouf - Cercivento (UD)";;
         *)      echo "${grassetto}${txtrosso}->${normale}${grassetto}${txtbianco}Scelta errata!Riprova...${normale} "
                 sleep 2
-                rin2go
+                rin2g0
                 ;;
 esac
 
@@ -224,11 +224,11 @@ echo "${grassetto}${txtsfoblu}$ONLY_TITLE${normale}"
 echo "${grassetto}${txtverde}->${normale}${grassetto}${txtbianco}Post-Processing...${normale}"
 echo ""
   # Variabili Master (Latitudine,Longitudine,Quota Ellissoidica)
-  MLAT=`cat $HOME/bin/rin2go/confs/stations.pos \
+  MLAT=`cat $HOME/bin/rin2g0/confs/stations.pos \
       | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $1}'`
-  MLON=`cat $HOME/bin/rin2go/confs/stations.pos \
+  MLON=`cat $HOME/bin/rin2g0/confs/stations.pos \
       | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $2}'`
-  MHEI=`cat $HOME/bin/rin2go/confs/stations.pos \
+  MHEI=`cat $HOME/bin/rin2g0/confs/stations.pos \
       | awk '/'$SITE'/ {print}' | awk '{OFS="\t"} {print $3}'`
   for file in `gfind -name *.obs`; do
            VAR0=$(basename "$file")
